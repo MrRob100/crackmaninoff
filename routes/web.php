@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 //index
-Route::get('/{para?}', 'DashboardController@index')->name('dashboard');
+Route::get('/{para?}', [App\Http\Controllers\DashboardController::class,'index'])->name('dashboard');
 
 //upload
-Route::post('/{para?}', 'DashboardController@upload')->name('upload-song');
+Route::post('/{para?}', [App\Http\Controllers\DashboardController::class, 'upload'])->name('upload-song');
 
 Auth::routes();
 
