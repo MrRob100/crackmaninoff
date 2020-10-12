@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//index
+Route::get('/{para?}', 'DashboardController@index')->name('dashboard');
+
+//upload
+Route::post('/{para?}', 'DashboardController@upload')->name('upload-song');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
