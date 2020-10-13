@@ -19,6 +19,8 @@ class DashboardController extends Controller
 
     public function index($para = "") {
 
+        dump($para);
+
         $checker = App::make('App\Services\UrlService');
         $checked = $checker->checkUrl($para);
 
