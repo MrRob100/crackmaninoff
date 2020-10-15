@@ -104,7 +104,7 @@ class DashboardController extends Controller
 
                 //deletes raw if conversion worked
                 if ($rc === 0) {
-                    //unlink($path.$subdir.$song_name);
+                    unlink($path.$subdir.$song_name);
                 }
             } elseif ($typ === 'audio/x-aiff') {
 
