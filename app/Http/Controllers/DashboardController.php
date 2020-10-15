@@ -38,14 +38,6 @@ class DashboardController extends Controller
 
         $para_a = $para == "" ? "" : $para."/";
 
-        $in_data = scandir('storage/data');
-
-        foreach ($in_data as $item) {
-            if (is_dir('storage/data/'.$item) && $item !== '.' && $item !== '..') {
-                $subdirs[] = [$item];
-            }
-        }
-
         $tunes_ordered = glob('storage/data/'.$para_a.'*.mp3');
         usort($tunes_ordered, function($a, $b) {
             return filemtime($a) < filemtime($b);
@@ -60,7 +52,7 @@ class DashboardController extends Controller
 
         $t_string = implode(' ', $tunes);
 
-        return view('dashboard', compact('t_string', 'para', 'subdirs'));
+        return view('dashboard', compact('t_string', 'para'));
     }
 
     public function upload(Request $request, $para) {
