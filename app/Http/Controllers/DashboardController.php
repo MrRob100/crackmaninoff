@@ -18,7 +18,9 @@ class DashboardController extends Controller
      */
 
     public function index($para = "") {
-        
+
+        shell_exec('pwd');
+
         $checker = App::make('App\Services\UrlService');
         $checked = $checker->checkUrl($para);
 
@@ -28,11 +30,11 @@ class DashboardController extends Controller
 
         ini_set('max_post_size', 0);
 
-//        if (!file_exists('storage/data/'.$para)) {
-//            //make it self destruct
-//            mkdir('storage/data/'.$para);
-//            chmod('storage/data/'.$para, 0777);
-//        }
+        if (!file_exists('storage/data/'.$para)) {
+            //make it self destruct
+            mkdir('storage/data/'.$para);
+            chmod('storage/data/'.$para, 0777);
+        }
 
         $para_a = $para == "" ? "" : $para."/";
 
