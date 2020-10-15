@@ -18,7 +18,7 @@
             <div class="close-container" v-for="(tune, index) in tunesFormatted" :key="tune">
                 <i :id='"modal-close-"+index' class="fa fa-close modal-close" aria-hidden="true"></i>
             </div>
-                
+
             <div class="fx-container speed-container">
                 <input class="fx speed-control" type="range" min="0.5" max="1.5" step="0.01" value="1">
             </div>
@@ -49,7 +49,7 @@
         <div class="crow cstop" v-for="(tune, index) in tunesFormatted" :key="tune">
             <button :id='"stbutton-"+index'>Stop</button>
         </div>
-        
+
       </div>
 
     </div>
@@ -179,7 +179,7 @@ body {
 }
 
 .dl-icon {
-    filter: brightness(30%);
+    filter: brightness(85%);
     position: absolute;
     right: 0;
     width: 40px;
@@ -311,8 +311,8 @@ body {
 /* Otherwise white in Chrome */
 
 input[type=range] {
-  -webkit-appearance: none; 
-  background: transparent; 
+  -webkit-appearance: none;
+  background: transparent;
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -328,7 +328,7 @@ input[type=range]::-ms-track {
   cursor: pointer;
 
   /* Hides the slider so custom styles can be added */
-  background: transparent; 
+  background: transparent;
   border-color: transparent;
   color: transparent;
 }

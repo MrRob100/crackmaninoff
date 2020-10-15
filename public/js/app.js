@@ -2015,39 +2015,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Slider.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Slider.vue?vue&type=script&lang=js& ***!
@@ -7094,7 +7061,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.o-page {\n    display: inline !important;\n    color: #B27FFF;\n    text-decoration: underline;\n}\n.delete-button {\n    cursor: pointer;\n    display: none;\n}\n.false-shift {\n    margin-top: 10px;\n    /* margin-left: 200px; */\n}\n.playback {\n    clear: left;\n}\n.playback-item {\n    display: inline;\n    font-size: 18px;\n}\nhtml, body {\n    height: 100%;\n    overflow-x: hidden;\n    /* touch-action: none; */\n    background-color: rgb(50, 2, 95) !important;\n    font-family: 'Courier New', Courier, monospace !important;\n}\nbody {\n    width: 100%;\n    position: relative;\n    color: #B27FFF !important;\n}\n.navbar {\n    height: 20px;\n}\n.info-icon {\n    float: right;\n    font-size: 24px;\n    padding-right: 1%;\n}\n.stack-del button {\n    display: none;\n}\n.upl {\n    width: 200px;\n    float: left;\n}\n.dl-icon {\n    filter: brightness(30%);\n    position: absolute;\n    right: 0;\n    width: 40px;\n    top: 0px;\n}\n.dld {\n    position: absolute;\n    right: 0;\n}\n.stack-house {\n    width: 100%;\n    margin-bottom: 10px;\n    cursor: pointer;\n    background-color: rgb(110, 78, 158);\n}\n.stack-slice:hover {\n    cursor: pointer;\n    filter: brightness(110%);\n}\n.contr {\n    height: 50px;\n}\n.modal-close {\n    cursor: pointer;\n    font-size: 24px;\n    position: absolute;\n    right: 0;\n}\n.control-box {\n    z-index: 10;\n    display: none;\n    overflow: hidden;\n    position: fixed;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n}\n@media (max-width: 600px) {\n.control-box {\n        width: 100%;\n        transform: translate(-50%, 0);\n        bottom: 48px;\n        top: initial;\n}\n}\n@media (min-width: 601px) {\n.control-box {\n        width: 400px;\n}\n}\n.bottom-container {\n    background-color: #111;\n}\n.close-container i {\n    display: none;\n}\n.crow button {\n    display: none;\n    width: 100%;\n}\n.ctop-row {\n    display: flex;\n    height: 300px;\n}\n.cbottom-row {\n    padding: 5px;\n    display: flex;\n}\n.stack-bottom {\n    height: 40px;\n    background-color: rgb(79, 56, 114);\n}\n.fx-container {\n    flex: 1;\n    padding-left: 13.5%;\n    padding-top: 270px;\n}\n.inln-btn {\n    z-index: 1;\n    position: absolute;\n}\n.canv {\n    position: absolute;\n    width: 100%;\n    height: 40px;\n}\n.fx {\n    width: 280px;\n    transform: rotate(-90deg);\n    transform-origin: 0%;\n    position: absolute;\n}\n.cbottom-row span {\n    text-align: center;\n    flex: 1;\n}\n.stbutton {\n    width: 100%;\n}\n.cstop button{\n    border: none;\n    height: 40px;\n    background-color: #fff;\n}\n/* sliders */\n\n/* Hides the slider so that custom slider can be made */\n/* Otherwise white in Chrome */\ninput[type=range] {\n  -webkit-appearance: none; \n  background: transparent;\n}\ninput[type=range]::-webkit-slider-thumb {\n  -webkit-appearance: none;\n}\ninput[type=range]:focus {\n  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */\n}\ninput[type=range]::-ms-track {\n  width: 100%;\n  cursor: pointer;\n\n  /* Hides the slider so custom styles can be added */\n  background: transparent; \n  border-color: transparent;\n  color: transparent;\n}\n\n/* thumb */\ninput[type=range]::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  height: 70px;\n  width: 70px;\n  border-radius: 50%;\n  background: #ffffff;\n  /* background: rgb(110, 78, 158); */\n  cursor: pointer;\n  margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */\n  box-shadow: -9px 12px 23px -3px rgba(0,0,0,0.59);\n}\n\n/* All the same stuff for Firefox */\ninput[type=range]::-moz-range-thumb {\n\n  box-shadow: -9px 12px 23px -3px rgba(0,0,0,0.59);\n\n  height: 70px;\n  width: 70px;\n  border-radius: 50%;\n  background: #ffffff;\n  /* background: rgb(110, 78, 158); */\n  cursor: pointer;\n}\n\n/* All the same stuff for IE */\ninput[type=range]::-ms-thumb {\n  box-shadow: -9px 12px 23px -3px rgba(0,0,0,0.59);\n\n  height: 70px;\n  width: 70px;\n  border-radius: 50%;\n  background: #ffffff;\n  cursor: pointer;\n}\n\n", ""]);
+exports.push([module.i, "\n.o-page {\n    display: inline !important;\n    color: #B27FFF;\n    text-decoration: underline;\n}\n.delete-button {\n    cursor: pointer;\n    display: none;\n}\n.false-shift {\n    margin-top: 10px;\n    /* margin-left: 200px; */\n}\n.playback {\n    clear: left;\n}\n.playback-item {\n    display: inline;\n    font-size: 18px;\n}\nhtml, body {\n    height: 100%;\n    overflow-x: hidden;\n    /* touch-action: none; */\n    background-color: rgb(50, 2, 95) !important;\n    font-family: 'Courier New', Courier, monospace !important;\n}\nbody {\n    width: 100%;\n    position: relative;\n    color: #B27FFF !important;\n}\n.navbar {\n    height: 20px;\n}\n.info-icon {\n    float: right;\n    font-size: 24px;\n    padding-right: 1%;\n}\n.stack-del button {\n    display: none;\n}\n.upl {\n    width: 200px;\n    float: left;\n}\n.dl-icon {\n    filter: brightness(85%);\n    position: absolute;\n    right: 0;\n    width: 40px;\n    top: 0px;\n}\n.dld {\n    position: absolute;\n    right: 0;\n}\n.stack-house {\n    width: 100%;\n    margin-bottom: 10px;\n    cursor: pointer;\n    background-color: rgb(110, 78, 158);\n}\n.stack-slice:hover {\n    cursor: pointer;\n    filter: brightness(110%);\n}\n.contr {\n    height: 50px;\n}\n.modal-close {\n    cursor: pointer;\n    font-size: 24px;\n    position: absolute;\n    right: 0;\n}\n.control-box {\n    z-index: 10;\n    display: none;\n    overflow: hidden;\n    position: fixed;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n}\n@media (max-width: 600px) {\n.control-box {\n        width: 100%;\n        transform: translate(-50%, 0);\n        bottom: 48px;\n        top: initial;\n}\n}\n@media (min-width: 601px) {\n.control-box {\n        width: 400px;\n}\n}\n.bottom-container {\n    background-color: #111;\n}\n.close-container i {\n    display: none;\n}\n.crow button {\n    display: none;\n    width: 100%;\n}\n.ctop-row {\n    display: flex;\n    height: 300px;\n}\n.cbottom-row {\n    padding: 5px;\n    display: flex;\n}\n.stack-bottom {\n    height: 40px;\n    background-color: rgb(79, 56, 114);\n}\n.fx-container {\n    flex: 1;\n    padding-left: 13.5%;\n    padding-top: 270px;\n}\n.inln-btn {\n    z-index: 1;\n    position: absolute;\n}\n.canv {\n    position: absolute;\n    width: 100%;\n    height: 40px;\n}\n.fx {\n    width: 280px;\n    transform: rotate(-90deg);\n    transform-origin: 0%;\n    position: absolute;\n}\n.cbottom-row span {\n    text-align: center;\n    flex: 1;\n}\n.stbutton {\n    width: 100%;\n}\n.cstop button{\n    border: none;\n    height: 40px;\n    background-color: #fff;\n}\n/* sliders */\n\n/* Hides the slider so that custom slider can be made */\n/* Otherwise white in Chrome */\ninput[type=range] {\n  -webkit-appearance: none;\n  background: transparent;\n}\ninput[type=range]::-webkit-slider-thumb {\n  -webkit-appearance: none;\n}\ninput[type=range]:focus {\n  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */\n}\ninput[type=range]::-ms-track {\n  width: 100%;\n  cursor: pointer;\n\n  /* Hides the slider so custom styles can be added */\n  background: transparent;\n  border-color: transparent;\n  color: transparent;\n}\n\n/* thumb */\ninput[type=range]::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  height: 70px;\n  width: 70px;\n  border-radius: 50%;\n  background: #ffffff;\n  /* background: rgb(110, 78, 158); */\n  cursor: pointer;\n  margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */\n  box-shadow: -9px 12px 23px -3px rgba(0,0,0,0.59);\n}\n\n/* All the same stuff for Firefox */\ninput[type=range]::-moz-range-thumb {\n\n  box-shadow: -9px 12px 23px -3px rgba(0,0,0,0.59);\n\n  height: 70px;\n  width: 70px;\n  border-radius: 50%;\n  background: #ffffff;\n  /* background: rgb(110, 78, 158); */\n  cursor: pointer;\n}\n\n/* All the same stuff for IE */\ninput[type=range]::-ms-thumb {\n  box-shadow: -9px 12px 23px -3px rgba(0,0,0,0.59);\n\n  height: 70px;\n  width: 70px;\n  border-radius: 50%;\n  background: #ffffff;\n  cursor: pointer;\n}\n\n", ""]);
 
 // exports
 
@@ -39104,53 +39071,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&":
-/*!*******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e& ***!
-  \*******************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Slider.vue?vue&type=template&id=872262e8&":
 /*!*********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Slider.vue?vue&type=template&id=872262e8& ***!
@@ -39254,7 +39174,11 @@ var render = function() {
                 _c("button", { staticClass: "dld", on: { click: _vm.dl } }, [
                   _c("img", {
                     staticClass: "crack-icon dl-icon",
-                    attrs: { src: "images/dld.png" }
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      title: "download",
+                      src: "images/dld.png"
+                    }
                   })
                 ])
               ])
@@ -51527,7 +51451,6 @@ Vue.config.devtools = true;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('tune-crop', __webpack_require__(/*! ./components/TuneCrop.vue */ "./resources/js/components/TuneCrop.vue")["default"]);
 Vue.component('tune', __webpack_require__(/*! ./components/Tune.vue */ "./resources/js/components/Tune.vue")["default"]);
 Vue.component('ctx', __webpack_require__(/*! ./components/Ctx.vue */ "./resources/js/components/Ctx.vue")["default"]);
@@ -51672,75 +51595,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Ctx_vue_vue_type_template_id_5778ae8c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Ctx_vue_vue_type_template_id_5778ae8c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/ExampleComponent.vue":
-/*!******************************************************!*\
-  !*** ./resources/js/components/ExampleComponent.vue ***!
-  \******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ExampleComponent.vue?vue&type=template&id=299e239e& */ "./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&");
-/* harmony import */ var _ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ExampleComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/ExampleComponent.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ExampleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e& ***!
-  \*************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ExampleComponent.vue?vue&type=template&id=299e239e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

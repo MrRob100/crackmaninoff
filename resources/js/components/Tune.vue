@@ -5,7 +5,7 @@
     class="delete-button"
     >DELETE</h3>
     <div class="stack-house to-blur">
-      <div 
+      <div
       @click="play"
       :id='"stack-" + pos'
       class="stack-slice stack-bottom"
@@ -26,10 +26,10 @@
         <canvas class="canv" :id='"canvas-"+pos'></canvas>
         <a :href="dlref"
         >
-        <button 
+        <button
         class="dld"
         v-on:click="dl">
-        <img class="crack-icon dl-icon" src="images/dld.png">
+        <img data-toggle="tooltip" title="download" class="crack-icon dl-icon" src="images/dld.png">
         </button>
         </a>
       </div>
@@ -44,10 +44,10 @@ import Layout from '../layoutChanges.js';
 
 export default {
   props: [
-    "playable", 
-    "ctx", 
-    "para", 
-    "name", 
+    "playable",
+    "ctx",
+    "para",
+    "name",
     "pos"
     ],
 
@@ -77,7 +77,7 @@ export default {
   },
 
   mounted() {
- 
+
     var isso = this;
     var body = document.querySelector("body");
     var close = document.getElementById("modal-close-" + isso.pos);
@@ -201,7 +201,7 @@ export default {
       this.src.connect(this.gain);
       this.gain.connect(this.filter).connect(this.notch).connect(this.masterCompression);
       this.masterCompression.connect(this.ctx.destination);
-      
+
       //start from
       var duration = this.src.buffer.duration;
       var offset = duration * this.playFrom;
@@ -287,7 +287,7 @@ export default {
           reverbValue.innerHTML = Math.floor(reverbControl.value * 100) + "%";
 
           isso.filter.frequency.value = filterControl.value < 20000 ? filterControl.value / 4 : filterControl.value;
-                      
+
           filterValue.innerHTML = Math.floor(isso.filter.frequency.value) + " Hz";
 
           isso.amt = modControl.value;
@@ -334,7 +334,7 @@ export default {
       stop.onclick = function() {
         clearInterval(fxInterval);
         clearInterval(modInt);
-        isso.stopProcess();   
+        isso.stopProcess();
       }
 
       var close = document.getElementById("modal-close-" + isso.pos);
@@ -374,7 +374,7 @@ export default {
     },
 
     playSelection: function(which, value) {
-      
+
       if (which === "startScale") {
         this.playFrom = value;
       }
@@ -389,7 +389,7 @@ export default {
     },
 
     dl: function() {
-        
+
         var isso = this;
 
         isso.dlding = true;
@@ -417,7 +417,7 @@ export default {
           var min = 1.0;
           var max = -1.0;
           for (var j=0; j<step; j++) {
-              var datum = data[(i*step)+j]; 
+              var datum = data[(i*step)+j];
               if (datum < min)
                   min = datum;
               if (datum > max)
