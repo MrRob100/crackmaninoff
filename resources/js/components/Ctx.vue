@@ -187,6 +187,8 @@ body {
 }
 
 .dld {
+    background-color: rgba(0,0,0,0);
+    border: none;
     position: absolute;
     right: 0;
 }
