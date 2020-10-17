@@ -45,6 +45,7 @@ import Layout from '../layoutChanges.js';
 export default {
   props: [
     "playable",
+    "playlist",
     "ctx",
     "para",
     "name",
@@ -148,7 +149,10 @@ export default {
 
       this.loading = true;
 
+      var pep = "http://prclive1.listenon.in:9960/?fbclid=IwAR1bAO9Hf-yvOGrjKVVdYt0XXnqo85o1G2IXWrzVtjIujOit5JqW7oQUtfI%27";
+
       var request = new XMLHttpRequest();
+      // request.open("GET", pep, true);
       request.open("GET", sourceUrl, true);
       request.responseType = "arraybuffer";
 
@@ -188,12 +192,11 @@ export default {
 
     connectAndPlay: function() {
       var isso = this;
-      // var body = document.querySelector("body");
-      // var toBlur = document.getElementsByClassName("to-blur");
 
       this.src = this.ctx.createBufferSource();
       this.src.buffer = this.myBuffer;
-      this.src.loop = true;
+
+      this.src.loop = !this.playlist;
 
       this.gain.gain.value = 0.5;
 

@@ -13,7 +13,7 @@
 import Meths from '../meths.js';
 
 export default {
-  
+
   props: ['setting', 'name'],
 
   data: function() {
@@ -34,8 +34,8 @@ export default {
     isso.getMarker("startScale");
     isso.getMarker("endScale");
 
-    var nonHeadStart = document.getElementById("div-start-" + isso.setting); 
-    var nonHeadEnd = document.getElementById("div-end-" + isso.setting); 
+    var nonHeadStart = document.getElementById("div-start-" + isso.setting);
+    var nonHeadEnd = document.getElementById("div-end-" + isso.setting);
 
     // Make the DIV element draggable:
     dragElement(nonHeadStart);
@@ -58,7 +58,7 @@ export default {
 
       //first touch
       function dragMouseDown(e) {
-        
+
         e = e || window.event;
         if (e.touches) {
           pos3 = e.touches[0].clientX;
@@ -107,16 +107,16 @@ export default {
         }
 
         if (endx >= startx) {
-          var posCalced = ((elmnt.offsetLeft - pos1) / window.innerWidth) * 100; 
+          var posCalced = ((elmnt.offsetLeft - pos1) / window.innerWidth) * 100;
           elmnt.style.left = elmnt.offsetLeft - pos1
         } else {
           if (elmnt.id == "div-end-" + isso.setting) {
             //end
-            elmnt.style.left = elmnt.offsetLeft + 1 + "px"; 
+            elmnt.style.left = elmnt.offsetLeft + 1 + "px";
           }
           if (elmnt.id == "div-start-" + isso.setting) {
             //start
-            elmnt.style.left = elmnt.offsetLeft - 1 + "px"; 
+            elmnt.style.left = elmnt.offsetLeft - 1 + "px";
           }
         }
       }
@@ -178,27 +178,26 @@ export default {
       request.open('GET', path, true);
       request.send();
       request.onload = function() {
-        
-        if (which === "startScale") {
-          var startPoint;
-          var endPoint;
 
-          if (request.response === "") {
-            startPoint = 0;
-          } else {
-            var startPoint = JSON.parse(request.response)[which] ? JSON.parse(request.response)[which] : 0; 
-          }
+        if (which === "startScale") {
+
+          // get start point from db for song id
+          var startPoint = 0.1;
 
           isso.start = startPoint * 100;
           isso.$emit('setStart', which, startPoint);
         }
 
         if (which === "endScale") {
+
+
+            //get  end point from db for song id
+            var endPoint = 0.9;
+
           if (request.response === "") {
             endPoint = 0.98;
             isso.end = "calc(100% - 20px)";
           } else {
-            endPoint = JSON.parse(request.response)[which];
             isso.end = endPoint * 100 + "%";
 
           }
