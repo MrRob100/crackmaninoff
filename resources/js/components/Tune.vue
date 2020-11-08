@@ -49,7 +49,8 @@ export default {
     "ctx",
     "para",
     "name",
-    "pos"
+    "pos",
+    "run"
     ],
 
   data: function() {
@@ -73,7 +74,8 @@ export default {
       filter: {},
       notch: {},
       masterCompression: {},
-      amt: 0
+      amt: 0,
+      stopClicked: false
     };
   },
 
@@ -149,10 +151,7 @@ export default {
 
       this.loading = true;
 
-      var pep = "http://prclive1.listenon.in:9960/?fbclid=IwAR1bAO9Hf-yvOGrjKVVdYt0XXnqo85o1G2IXWrzVtjIujOit5JqW7oQUtfI%27";
-
       var request = new XMLHttpRequest();
-      // request.open("GET", pep, true);
       request.open("GET", sourceUrl, true);
       request.responseType = "arraybuffer";
 
@@ -194,6 +193,17 @@ export default {
       var isso = this;
 
       this.src = this.ctx.createBufferSource();
+
+      this.src.onended = function() {
+
+          console.log('check stop clicked: ', isso.stopClicked);
+
+          if (!isso.stopClicked) {
+              Layout.stopped(isso.pos);
+              isso.$emit('ended', isso.pos);
+          }
+      }
+
       this.src.buffer = this.myBuffer;
 
       this.src.loop = !this.playlist;
@@ -297,7 +307,7 @@ export default {
           modValue.innerHTML = Math.floor(modControl.value * 100) + "%";
 
           } catch(err) {
-            console.log(err);
+            console.error(err);
         }
       }, 50);
 
@@ -355,7 +365,7 @@ export default {
 
     cropVal: function(which, value) {
       var isso = this;
-      isso.ableToPlay = false;
+      isso.ableToPlay = false;s
       setTimeout(function() {
           isso.ableToPlay = true;
           isso.$emit('able', true);
@@ -364,9 +374,19 @@ export default {
     },
 
     stopProcess: function() {
+      var isso = this;
+
+      //prevent roll on to next song
+
+      this.stopClicked = true;
+
+      console.log('stop click set: ', this.stopClicked);
+
+      setTimeout(function() {
+          isso.stopClicked = false;
+      }, 200);
 
       Layout.stopped(this.pos);
-
       this.$emit('able', true);
       this.ableToPlay = true;
       this.src.stop(0);
@@ -430,6 +450,15 @@ export default {
       }
     },
 
-  }
+  },
+
+    watch: {
+      run: function(val) {
+          var isso = this;
+          if (val == this.pos) {
+              this.play();
+          }
+      }
+    }
 };
 </script>

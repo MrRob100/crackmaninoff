@@ -16,6 +16,7 @@
 
       <div class="slither" v-for="(tune, index) in tunesFormatted" :key="tune">
         <tune
+        @ended="endHandler"
         @able="setPlayable"
         :playable="playable"
         :playlist="playlist"
@@ -23,6 +24,7 @@
         :para="para"
         :name="tune"
         :pos="index"
+        :run="run"
         ></tune>
       </div>
 
@@ -82,6 +84,7 @@ export default {
             initSource: {},
             tunesFormatted: {},
             playable: true,
+            run: false,
         }
     },
 
@@ -128,6 +131,16 @@ export default {
                 this.initSource.start(0, 1);
             }
         },
+
+        endHandler(val) {
+            var isso = this;
+            if (this.playlist) {
+                isso.playable = true;
+
+                // check if not last tune
+                this.run = val + 1;
+            }
+        }
 
     }
 
