@@ -13,7 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//markers
+Route::get('/get', 'DashboardController@getMarker');
+Route::get('/get', [App\Http\Controllers\DashboardController::class, 'getMarker']);
+
+Route::get('/set', 'DashboardController@setMarker');
+Route::get('/set', [App\Http\Controllers\DashboardController::class, 'setMarker']);
+
 //index
+
+Route::view('/test', 'test');
+
 Route::get('/{para?}', [App\Http\Controllers\DashboardController::class,'index'])->name('dashboard');
 
 //upload

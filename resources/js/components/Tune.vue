@@ -50,7 +50,8 @@ export default {
     "para",
     "name",
     "pos",
-    "run"
+    "run",
+    "lastOne"
     ],
 
   data: function() {
@@ -75,7 +76,7 @@ export default {
       notch: {},
       masterCompression: {},
       amt: 0,
-      stopClicked: false
+      stopClicked: false,
     };
   },
 
@@ -195,9 +196,6 @@ export default {
       this.src = this.ctx.createBufferSource();
 
       this.src.onended = function() {
-
-          console.log('check stop clicked: ', isso.stopClicked);
-
           if (!isso.stopClicked) {
               Layout.stopped(isso.pos);
               isso.$emit('ended', isso.pos);
@@ -375,13 +373,7 @@ export default {
 
     stopProcess: function() {
       var isso = this;
-
-      //prevent roll on to next song
-
       this.stopClicked = true;
-
-      console.log('stop click set: ', this.stopClicked);
-
       setTimeout(function() {
           isso.stopClicked = false;
       }, 200);

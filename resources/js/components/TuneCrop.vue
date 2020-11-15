@@ -18,8 +18,8 @@ export default {
 
   data: function() {
     return {
-      startString: "startScale",
-      endString: "endScale",
+      startString: "s",
+      endString: "e",
       start: 0,
       end: "calc(100% -  20px)",
       settingEnd: false
@@ -31,8 +31,8 @@ export default {
 
     var isso = this;
 
-    isso.getMarker("startScale");
-    isso.getMarker("endScale");
+    isso.getMarker("s");
+    isso.getMarker("e");
 
     var nonHeadStart = document.getElementById("div-start-" + isso.setting);
     var nonHeadEnd = document.getElementById("div-end-" + isso.setting);
@@ -96,7 +96,7 @@ export default {
             elmnt.style.left = "calc(100% -  20px)";
 
             if (!isso.settingEnd) {
-              isso.setMarkers('endScale', endx);
+              isso.setMarkers('e', endx);
               isso.settingEnd = true;
 
               setTimeout(function() {
@@ -137,24 +137,24 @@ export default {
 
         if (e.toElement) {
           if (e.toElement.id == "div-start-" + isso.setting + "-header") {
-            isso.setMarkers('startScale', e.clientX);
+            isso.setMarkers('s', e.clientX);
           }
 
           if (e.toElement.id == "div-end-" + isso.setting + "-header") {
-            isso.setMarkers('endScale', e.clientX);
+            isso.setMarkers('e', e.clientX);
           }
         } else {
           if (e.target.id == "div-start-" + isso.setting + "-header") {
-            isso.setMarkers('startScale', e.pageX);
+            isso.setMarkers('s', e.pageX);
           }
 
           if (e.target.id == "div-end-" + isso.setting + "-header") {
-            isso.setMarkers('endScale', e.pageX);
+            isso.setMarkers('e', e.pageX);
           }
         }
 
         if (pos3 < 10) {
-            isso.setMarkers('startScale', 0);
+            isso.setMarkers('s', 0);
         }
 
         // stop moving when mouse button is released:
@@ -170,49 +170,47 @@ export default {
     //return numeric
     getMarker: function(which) {
 
-      var isso = this;
-
-      var request = new XMLHttpRequest();
-      var path = Meths.getMarkersPath(this.para, this.name);
-
-      request.open('GET', path, true);
-      request.send();
-      request.onload = function() {
-
-        if (which === "startScale") {
-
-          // get start point from db for song id
-          var startPoint = 0.1;
-
-          isso.start = startPoint * 100;
-          isso.$emit('setStart', which, startPoint);
-        }
-
-        if (which === "endScale") {
-
-
-            //get  end point from db for song id
-            var endPoint = 0.9;
-
-          if (request.response === "") {
-            endPoint = 0.98;
-            isso.end = "calc(100% - 20px)";
-          } else {
-            isso.end = endPoint * 100 + "%";
-
+        const isso = this;
+        axios.get("get", {
+          params: {
+              se: which,
+              name: this.name,
           }
-          isso.$emit('setEnd', which, endPoint);
-        }
-      }
+      }).then(response => {
 
+          if (response.data.length > 0) {
+              if (which === "s") {
+                  var startPoint = response.data[0].start;
+                  isso.start = startPoint * 100;
+                  isso.$emit('setStart', which, startPoint);
+              }
+
+              if (which === "e") {
+                  var endPoint = response.data[0].end;
+                  isso.end = endPoint * 100 + "%";
+                  isso.$emit('setEnd', which, endPoint);
+              }
+          } else {
+              // 0 data
+          }
+
+      });
     },
 
     setMarkers: function(which, value) {
       var scaledValue = value / window.innerWidth;
-      var request = new XMLHttpRequest();
-      var path = Meths.setMarkersPath(this.para, this.name, which, scaledValue);
-      request.open('GET', path, true);
-      request.send();
+
+        axios.get("set", {
+            params: {
+                name: this.name,
+                se: which,
+                value: scaledValue,
+                page: this.para
+            }
+        }).then(response => {
+            console.log('response', response);
+        });
+
       this.$emit('value', which, scaledValue);
       }
   }

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\App;
 use App\Services\UrlService;
+use App\Models\Page;
+use App\Models\Tune;
 
 class DashboardController extends Controller
 {
@@ -73,7 +75,6 @@ class DashboardController extends Controller
             .mp3 = 'audio/mpeg'
             .aif = 'audio/x-aiff'
         */
-
         if ($typ === 'audio/mpeg' || $typ === 'audio/x-wav' || $typ === 'audio/x-aiff') {
 
             //removes spaces in name
@@ -116,6 +117,25 @@ class DashboardController extends Controller
                 }
             }
 
+
+
+            //db record
+
+
+            if(!Numbers::where('country',$country)->exists()){
+                Numbers::Create([
+                    'country'    => $country
+                ]);
+            }
+
+            $tune = new Tune();
+            $tune->name = $song_name;
+            $tune->save();
+
+            //how to do FKC?????
+
+
+
         } else {
 
             return redirect($para);
@@ -152,19 +172,44 @@ class DashboardController extends Controller
 
     public function getMarker() {
 
-        $position = $_GET['position'];
-        $markers = json_decode(file_get_contents('../public/data/markerData.json'), true);
-        return array_key_exists($position, $markers) ? $markers[$position] : null;
+        if ($_GET['se'] === 's') {
+            $which = 'start';
+        } elseif ($_GET['se'] === 'e') {
+            $which = 'end';
+        } else {
+            //throw exception
+            $which = null;
+        }
+
+        $position = DB::table('tunes')->where([
+            ['name', $_GET['name']],
+        ])->get($which);
+
+        return $position;
     }
 
     public function setMarker() {
-        $position = $_GET['position'];
-        $which = $_GET['which'];
-        $val = $_GET['value'];
 
-        $markers = json_decode(file_get_contents('../public/data/markerData.json'), true);
-        $markers[$position][$which] = $val;
-        file_put_contents('../public/data/markerData.json', json_encode($markers));
+        if ($_GET['se'] === 's') {
+            $which = 'start';
+        } elseif ($_GET['se'] === 'e') {
+            $which = 'end';
+        } else {
+            $which = null;
+        }
+
+        $page_id = DB::table('pages')->where([
+            ['name', isset($_GET['page']) ? $_GET['page'] : '/'],
+        ])->get('id')->first()->id;
+
+        DB::table('tunes')->where([
+            ['name', $_GET['name']]
+            ])->update(
+            [
+                $which => $_GET['value'],
+                'page_id' => $page_id
+            ]
+        );
     }
 
     public function ctx() {

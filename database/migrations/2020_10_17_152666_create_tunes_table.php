@@ -16,10 +16,10 @@ class CreateTunesTable extends Migration
         Schema::create('tunes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('plays');
+            $table->integer('plays')->nullable();
             $table->unsignedBigInteger('page_id');
-            $table->integer('start');
-            $table->integer('end');
+            $table->float('start')->nullable();
+            $table->float('end')->nullable();
             $table->timestamps();
 
             $table->foreign('page_id')->references('id')

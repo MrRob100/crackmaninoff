@@ -25,6 +25,7 @@
         :name="tune"
         :pos="index"
         :run="run"
+        :lastOne="tunesFormatted.length"
         ></tune>
       </div>
 

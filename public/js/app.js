@@ -1979,6 +1979,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['tunes', 'para'],
   data: function data() {
@@ -1987,7 +1990,8 @@ __webpack_require__.r(__webpack_exports__);
       init: true,
       initSource: {},
       tunesFormatted: {},
-      playable: true
+      playable: true,
+      run: false
     };
   },
   mounted: function mounted() {
@@ -2023,6 +2027,15 @@ __webpack_require__.r(__webpack_exports__);
       if (!playable && this.init) {
         this.init = false;
         this.initSource.start(0, 1);
+      }
+    },
+    endHandler: function endHandler(val) {
+      var isso = this;
+
+      if (this.playlist) {
+        isso.playable = true; // check if not last tune
+
+        this.run = val + 1;
       }
     }
   }
@@ -2123,7 +2136,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["playable", "playlist", "ctx", "para", "name", "pos"],
+  props: ["playable", "playlist", "ctx", "para", "name", "pos", "run", "lastOne"],
   data: function data() {
     return {
       deleted: false,
@@ -2145,7 +2158,8 @@ __webpack_require__.r(__webpack_exports__);
       filter: {},
       notch: {},
       masterCompression: {},
-      amt: 0
+      amt: 0,
+      stopClicked: false
     };
   },
   mounted: function mounted() {
@@ -2203,9 +2217,7 @@ __webpack_require__.r(__webpack_exports__);
       var subdir = this.para !== "-" ? this.para + "/" + this.name : "" + this.name;
       var sourceUrl = "storage/data/" + subdir;
       this.loading = true;
-      var pep = "http://prclive1.listenon.in:9960/?fbclid=IwAR1bAO9Hf-yvOGrjKVVdYt0XXnqo85o1G2IXWrzVtjIujOit5JqW7oQUtfI%27";
-      var request = new XMLHttpRequest(); // request.open("GET", pep, true);
-
+      var request = new XMLHttpRequest();
       request.open("GET", sourceUrl, true);
       request.responseType = "arraybuffer";
       var isso = this;
@@ -2235,6 +2247,14 @@ __webpack_require__.r(__webpack_exports__);
     connectAndPlay: function connectAndPlay() {
       var isso = this;
       this.src = this.ctx.createBufferSource();
+
+      this.src.onended = function () {
+        if (!isso.stopClicked) {
+          _layoutChanges_js__WEBPACK_IMPORTED_MODULE_1__["default"].stopped(isso.pos);
+          isso.$emit('ended', isso.pos);
+        }
+      };
+
       this.src.buffer = this.myBuffer;
       this.src.loop = !this.playlist;
       this.gain.gain.value = 0.5;
@@ -2310,7 +2330,7 @@ __webpack_require__.r(__webpack_exports__);
           isso.amt = modControl.value;
           modValue.innerHTML = Math.floor(modControl.value * 100) + "%";
         } catch (err) {
-          console.log(err);
+          console.error(err);
         }
       }, 50);
       var i = 2;
@@ -2364,6 +2384,7 @@ __webpack_require__.r(__webpack_exports__);
     cropVal: function cropVal(which, value) {
       var isso = this;
       isso.ableToPlay = false;
+      s;
       setTimeout(function () {
         isso.ableToPlay = true;
         isso.$emit('able', true);
@@ -2371,6 +2392,11 @@ __webpack_require__.r(__webpack_exports__);
       this.playSelection(which, value);
     },
     stopProcess: function stopProcess() {
+      var isso = this;
+      this.stopClicked = true;
+      setTimeout(function () {
+        isso.stopClicked = false;
+      }, 200);
       _layoutChanges_js__WEBPACK_IMPORTED_MODULE_1__["default"].stopped(this.pos);
       this.$emit('able', true);
       this.ableToPlay = true;
@@ -2424,6 +2450,15 @@ __webpack_require__.r(__webpack_exports__);
         context.fillRect(i, (1 + min) * amp, 1, Math.max(1, (max - min) * amp));
       }
     }
+  },
+  watch: {
+    run: function run(val) {
+      var isso = this;
+
+      if (val == this.pos) {
+        this.play();
+      }
+    }
   }
 });
 
@@ -2454,8 +2489,8 @@ __webpack_require__.r(__webpack_exports__);
   props: ['setting', 'name'],
   data: function data() {
     return {
-      startString: "startScale",
-      endString: "endScale",
+      startString: "s",
+      endString: "e",
       start: 0,
       end: "calc(100% -  20px)",
       settingEnd: false
@@ -2464,8 +2499,8 @@ __webpack_require__.r(__webpack_exports__);
   //when component has mounted
   mounted: function mounted() {
     var isso = this;
-    isso.getMarker("startScale");
-    isso.getMarker("endScale");
+    isso.getMarker("s");
+    isso.getMarker("e");
     var nonHeadStart = document.getElementById("div-start-" + isso.setting);
     var nonHeadEnd = document.getElementById("div-end-" + isso.setting); // Make the DIV element draggable:
 
@@ -2529,7 +2564,7 @@ __webpack_require__.r(__webpack_exports__);
           elmnt.style.left = "calc(100% -  20px)";
 
           if (!isso.settingEnd) {
-            isso.setMarkers('endScale', endx);
+            isso.setMarkers('e', endx);
             isso.settingEnd = true;
             setTimeout(function () {
               isso.settingEnd = false;
@@ -2565,24 +2600,24 @@ __webpack_require__.r(__webpack_exports__);
 
         if (e.toElement) {
           if (e.toElement.id == "div-start-" + isso.setting + "-header") {
-            isso.setMarkers('startScale', e.clientX);
+            isso.setMarkers('s', e.clientX);
           }
 
           if (e.toElement.id == "div-end-" + isso.setting + "-header") {
-            isso.setMarkers('endScale', e.clientX);
+            isso.setMarkers('e', e.clientX);
           }
         } else {
           if (e.target.id == "div-start-" + isso.setting + "-header") {
-            isso.setMarkers('startScale', e.pageX);
+            isso.setMarkers('s', e.pageX);
           }
 
           if (e.target.id == "div-end-" + isso.setting + "-header") {
-            isso.setMarkers('endScale', e.pageX);
+            isso.setMarkers('e', e.pageX);
           }
         }
 
         if (pos3 < 10) {
-          isso.setMarkers('startScale', 0);
+          isso.setMarkers('s', 0);
         } // stop moving when mouse button is released:
 
 
@@ -2597,40 +2632,40 @@ __webpack_require__.r(__webpack_exports__);
     //return numeric
     getMarker: function getMarker(which) {
       var isso = this;
-      var request = new XMLHttpRequest();
-      var path = _meths_js__WEBPACK_IMPORTED_MODULE_0__["default"].getMarkersPath(this.para, this.name);
-      request.open('GET', path, true);
-      request.send();
-
-      request.onload = function () {
-        if (which === "startScale") {
-          // get start point from db for song id
-          var startPoint = 0.1;
-          isso.start = startPoint * 100;
-          isso.$emit('setStart', which, startPoint);
+      axios.get("get", {
+        params: {
+          se: which,
+          name: this.name
         }
-
-        if (which === "endScale") {
-          //get  end point from db for song id
-          var endPoint = 0.9;
-
-          if (request.response === "") {
-            endPoint = 0.98;
-            isso.end = "calc(100% - 20px)";
-          } else {
-            isso.end = endPoint * 100 + "%";
+      }).then(function (response) {
+        if (response.data.length > 0) {
+          if (which === "s") {
+            var startPoint = response.data[0].start;
+            isso.start = startPoint * 100;
+            isso.$emit('setStart', which, startPoint);
           }
 
-          isso.$emit('setEnd', which, endPoint);
+          if (which === "e") {
+            var endPoint = response.data[0].end;
+            isso.end = endPoint * 100 + "%";
+            isso.$emit('setEnd', which, endPoint);
+          }
+        } else {// 0 data
         }
-      };
+      });
     },
     setMarkers: function setMarkers(which, value) {
       var scaledValue = value / window.innerWidth;
-      var request = new XMLHttpRequest();
-      var path = _meths_js__WEBPACK_IMPORTED_MODULE_0__["default"].setMarkersPath(this.para, this.name, which, scaledValue);
-      request.open('GET', path, true);
-      request.send();
+      axios.get("set", {
+        params: {
+          name: this.name,
+          se: which,
+          value: scaledValue,
+          page: this.para
+        }
+      }).then(function (response) {
+        console.log('response', response);
+      });
       this.$emit('value', which, scaledValue);
     }
   }
@@ -42194,9 +42229,11 @@ var render = function() {
                     ctx: _vm.ctx,
                     para: _vm.para,
                     name: tune,
-                    pos: index
+                    pos: index,
+                    run: _vm.run,
+                    lastOne: _vm.tunesFormatted.length
                   },
-                  on: { able: _vm.setPlayable }
+                  on: { ended: _vm.endHandler, able: _vm.setPlayable }
                 })
               ],
               1
@@ -54866,15 +54903,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************!*\
   !*** ./resources/js/components/Howltest.vue ***!
   \**********************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Howltest_vue_vue_type_template_id_bfa849ce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Howltest.vue?vue&type=template&id=bfa849ce& */ "./resources/js/components/Howltest.vue?vue&type=template&id=bfa849ce&");
 /* harmony import */ var _Howltest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Howltest.vue?vue&type=script&lang=js& */ "./resources/js/components/Howltest.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Howltest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Howltest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -54904,7 +54940,7 @@ component.options.__file = "resources/js/components/Howltest.vue"
 /*!***********************************************************************!*\
   !*** ./resources/js/components/Howltest.vue?vue&type=script&lang=js& ***!
   \***********************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
