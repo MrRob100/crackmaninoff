@@ -363,7 +363,7 @@ export default {
 
     cropVal: function(which, value) {
       var isso = this;
-      isso.ableToPlay = false;s
+      isso.ableToPlay = false;
       setTimeout(function() {
           isso.ableToPlay = true;
           isso.$emit('able', true);

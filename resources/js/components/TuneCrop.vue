@@ -208,7 +208,7 @@ export default {
                 page: this.para
             }
         }).then(response => {
-            console.log('response', response);
+            //
         });
 
       this.$emit('value', which, scaledValue);
