@@ -116,26 +116,6 @@ class DashboardController extends Controller
                     unlink($path.$subdir.$song_name);
                 }
             }
-
-
-
-            //db record
-
-
-            if(!Numbers::where('country',$country)->exists()){
-                Numbers::Create([
-                    'country'    => $country
-                ]);
-            }
-
-            $tune = new Tune();
-            $tune->name = $song_name;
-            $tune->save();
-
-            //how to do FKC?????
-
-
-
         } else {
 
             return redirect($para);
