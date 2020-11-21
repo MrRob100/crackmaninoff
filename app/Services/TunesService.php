@@ -37,7 +37,7 @@ class TunesService
     public function compressConvertFile($para, $song_name, $typ)
     {
         //$_SERVER['SERVER_NAME'] used to be set
-        $o_path = $_SERVER['SERVER_NAME'] === '' ? 'local/' : '';
+        $o_path = $_SERVER['SERVER_NAME'] === '' ? '/usr/local/bin' : '';
 
         if ($para === '-' || $para === '') {
             $subdir = '';
@@ -49,7 +49,7 @@ class TunesService
 
         //mp3 compression
         if ($typ === 'audio/mpeg') {
-            exec('/usr/' . $o_path . 'bin/ffmpeg -i ' . $dir . $song_name . ' -ab 110k ' . $dir . '_' . $song_name, $o, $r);
+            exec($o_path.' -i ' . $dir . $song_name . ' -ab 110k ' . $dir . '_' . $song_name, $o, $r);
 
             //deletes raw if compression worked
             if ($r === 0) {
@@ -62,7 +62,7 @@ class TunesService
 
             //wav conversion
         } elseif ($typ === 'audio/x-wav') {
-            exec('/usr/' . $o_path . 'bin/ffmpeg -i ' . $dir . $song_name . ' -f mp3 ' . $dir . '_' . str_replace('.wav', '', $song_name) . '.mp3', $oc, $rc);
+            exec($o_path.' -i ' . $dir . $song_name . ' -f mp3 ' . $dir . '_' . str_replace('.wav', '', $song_name) . '.mp3', $oc, $rc);
 
             //deletes raw if conversion worked
             if ($rc === 0) {
@@ -74,7 +74,7 @@ class TunesService
         } elseif ($typ === 'audio/x-aiff') {
 
             // ffmpeg -i sauce.aif -f mp3 -acodec libmp3lame -ab 192000 -ar 44100 sauce.mp3
-            exec('/usr/' . $o_path . 'bin/ffmpeg -i ' . $dir . $song_name . ' -f mp3 -acodec libmp3lame -ab 192000 -ar 44100 ' . $dir . '_' . str_replace('.aif', '', $song_name) . '.mp3', $ao, $ac);
+            exec($o_path.' -i ' . $dir . $song_name . ' -f mp3 -acodec libmp3lame -ab 192000 -ar 44100 ' . $dir . '_' . str_replace('.aif', '', $song_name) . '.mp3', $ao, $ac);
             //deletes raw if conversion worked
             if ($ac === 0) {
                 unlink($dir . $song_name);
