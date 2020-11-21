@@ -7,9 +7,7 @@ namespace App\Services;
 class UrlService
 {
     public function checkUrl($sub) {
-
         $sub = $sub.'t';
-
         if (
             is_string($sub)
             && strlen($sub) < 15
