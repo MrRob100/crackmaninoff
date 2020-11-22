@@ -158,7 +158,7 @@ export default {
 
 .delete-button {
     cursor: pointer;
-    /*display: none;*/
+    display: none;
 }
 
 .false-shift {
