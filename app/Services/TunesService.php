@@ -89,7 +89,7 @@ class TunesService
         } elseif ($typ === 'audio/x-aiff') {
 
             // ffmpeg -i sauce.aif -f mp3 -acodec libmp3lame -ab 192000 -ar 44100 sauce.mp3
-            exec($o_path. '-i' . $dir . $song_name . ' -f mp3 -acodec libmp3lame -ab 192000 -ar 44100 ' . $dir . '_' . str_replace('.aif', '', $song_name) . '.mp3', $ao, $ac);
+            exec($o_path. ' -i' . $dir . $song_name . ' -f mp3 -acodec libmp3lame -ab 192000 -ar 44100 ' . $dir . '_' . str_replace('.aif', '', $song_name) . '.mp3', $ao, $ac);
             //deletes raw if conversion worked
             if ($ac === 0) {
                 unlink($dir . $song_name);
