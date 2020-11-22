@@ -88,7 +88,7 @@ class DashboardController extends Controller
         try {
             unlink('storage/data/'.$para.$_GET['song']);
         } catch (exception $e) {
-            //log exep
+            Log::error('delete failed for '. $_GET['song']. ' '.$e->getMessage());
             return "";
         }
         return 'deleted';
