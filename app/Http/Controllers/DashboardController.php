@@ -79,11 +79,9 @@ class DashboardController extends Controller
 
     public function delete() {
 
+        dd('in del');
+
         $para = $_GET['para'] == '-' ? '' : $_GET['para'].'/';
-
-        $markers = json_decode(file_get_contents('../public/data/markerData.json'), true);
-
-        unset($markers[$_GET['song']]);
 
         try {
             unlink('storage/data/'.$para.$_GET['song']);
