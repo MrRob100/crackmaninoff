@@ -37,11 +37,11 @@ class DashboardController extends Controller
             chmod('storage/data/'.$para, 0777);
         }
 
-        $para_a = $para == "" ? "" : $para."/";
-
         //save new page WORK ON THIS
-        $p = Page::firstOrNew(['name' => $para]);
+        $p = Page::firstOrNew(['name' => $para === '' ? '/' : $para]);
         $p->save();
+
+        $para_a = $para == "" ? "" : $para."/";
 
         $tunes_ordered = glob('storage/data/'.$para_a.'*.mp3');
         usort($tunes_ordered, function($a, $b) {
@@ -72,7 +72,7 @@ class DashboardController extends Controller
             // return Storage::download(app_path('../public/storage/data/'.$_GET['song']));
             return Response()->download('storage/data/'.$_GET['song']);
         } catch (exception $e) {
-            dump($e);
+            log::error('error downloading' . $_GET['song'] .' '. $e->getMessage());
         }
     }
 
