@@ -99,7 +99,7 @@ class TunesService
             }
         }
 
-        $this->logRecord($song_name, $para === '' ? '/' : $para);
+        $this->logRecord('_'.$song_name, $para === '' ? '/' : $para);
         return true;
 
     }
