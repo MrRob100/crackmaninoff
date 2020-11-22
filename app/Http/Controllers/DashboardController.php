@@ -124,7 +124,11 @@ class DashboardController extends Controller
             ['name', isset($_GET['page']) ? $_GET['page'] : '/'],
         ])->get('id')->first()->id;
 
-        dd('page id', $page_id);
+        dump($_GET['name']);
+
+        dd(DB::table('tunes')->where([
+            ['name', $_GET['name']]
+        ])->first());
 
         DB::table('tunes')->where([
             ['name', $_GET['name']]
