@@ -95,6 +95,8 @@ class TunesService
                 unlink($dir . $song_name);
             } else {
                 Log::warning('aiff conversion for '.$song_name.' failed');
+                Log::info('fc: '. $o_path. '-i' . $dir . $song_name . ' -f mp3 -acodec libmp3lame -ab 192000 -ar 44100 ' . $dir . '_' . str_replace('.aif', '', $song_name) . '.mp3');
+
                 return false;
             }
         }
