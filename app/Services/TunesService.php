@@ -28,13 +28,10 @@ class TunesService
 
     public function logRecord($tune, $page)
     {
-
-        dd('page: ',$page);
-
         try {
             Tune::create([
                 'name' => $tune,
-                'page_id' => Page::where('name', $page)->first()->id
+                'page_id' => Page::where('name', $page === '-' ? '/' : $page)->first()->id
             ])->save();
 
         } catch (exception $e) {
