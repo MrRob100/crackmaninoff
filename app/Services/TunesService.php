@@ -28,6 +28,9 @@ class TunesService
 
     public function logRecord($tune, $page)
     {
+
+        dd('page: ',$page);
+
         try {
             Tune::create([
                 'name' => $tune,
@@ -44,7 +47,7 @@ class TunesService
     public function compressConvertFile($para, $song_name, $typ)
     {
 //        $o_path = ($_SERVER['SERVER_NAME'] === '' ? '/usr/local/bin/' : '') . $this->appPath . $this->ffmpegPath;
-        
+
         //$_SERVER['SERVER_NAME'] used to be set
         if ($_SERVER['SERVER_NAME'] === '') {
             //local
