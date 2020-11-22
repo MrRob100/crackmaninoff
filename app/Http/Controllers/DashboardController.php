@@ -105,7 +105,7 @@ class DashboardController extends Controller
             $which = null;
         }
 
-        $position = DB::table('tunes')->where('name', $_GET['name'])->get($which);
+        $position = Tune::where('name', $_GET['name'])->get($which);
 
         return $position;
     }
@@ -120,17 +120,11 @@ class DashboardController extends Controller
             $which = null;
         }
 
-        $page_id = DB::table('pages')->where([
+        $page_id = Page::where([
             ['name', isset($_GET['page']) ? $_GET['page'] : '/'],
         ])->get('id')->first()->id;
 
-        dump($_GET['name']);
-
-        dd(DB::table('tunes')->where([
-            ['name', $_GET['name']]
-        ])->first());
-
-        DB::table('tunes')->where([
+        Tune::where([
             ['name', $_GET['name']]
             ])->update(
             [
