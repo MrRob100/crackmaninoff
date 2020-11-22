@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,22 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//delete
+Route::get('/del', [DashboardController::class, 'delete']);
+
 //markers
 Route::get('/get', 'DashboardController@getMarker');
-Route::get('/get', [App\Http\Controllers\DashboardController::class, 'getMarker']);
+Route::get('/get', [DashboardController::class, 'getMarker']);
 
 Route::get('/set', 'DashboardController@setMarker');
-Route::get('/set', [App\Http\Controllers\DashboardController::class, 'setMarker']);
+Route::get('/set', [DashboardController::class, 'setMarker']);
 
 //index
-
 Route::view('/test', 'test');
 
-Route::get('/{para?}', [App\Http\Controllers\DashboardController::class,'index'])->name('dashboard');
+Route::get('/{para?}', [DashboardController::class,'index'])->name('dashboard');
 
 //upload
-Route::post('/{para?}', [App\Http\Controllers\DashboardController::class, 'upload'])->name('upload-song');
+Route::post('/{para?}', [DashboardController::class, 'upload'])->name('upload-song');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');

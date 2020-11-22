@@ -78,11 +78,7 @@ class DashboardController extends Controller
     }
 
     public function delete() {
-
-        dd('in del');
-
         $para = $_GET['para'] == '-' ? '' : $_GET['para'].'/';
-
         try {
             unlink('storage/data/'.$para.$_GET['song']);
         } catch (exception $e) {
