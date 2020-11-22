@@ -38,6 +38,7 @@ class DashboardController extends Controller
         }
 
         //save new page WORK ON THIS
+
         $p = Page::firstOrNew(['name' => $para === '' ? '/' : $para]);
         $p->save();
 
@@ -122,6 +123,8 @@ class DashboardController extends Controller
         $page_id = DB::table('pages')->where([
             ['name', isset($_GET['page']) ? $_GET['page'] : '/'],
         ])->get('id')->first()->id;
+
+        dd('page id', $page_id);
 
         DB::table('tunes')->where([
             ['name', $_GET['name']]
