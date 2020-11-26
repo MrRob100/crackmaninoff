@@ -18,6 +18,15 @@ export default {
     //which: startScale or endScale
     getMarkersPath(para, name, which) {
         return 'get?which=' + which + "&position=" + name;
+    },
+
+    //check markers position
+    findMarker(pos, which) {
+        console.log('fm', 'div-' + which + '-' + pos);
+
+        var marker = document.getElementById('div-' + which + '-' + pos);
+
+        return marker.offsetLeft;
     }
-    
+
 }

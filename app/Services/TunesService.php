@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Log;
 
 class TunesService
 {
-
     protected $appPath = '/home/u1269-rdkn8kbgg4s7/www/roba6.sg-host.com';
 
     protected $songPath = '/public_html/public/storage/data/';
@@ -45,22 +44,22 @@ class TunesService
     {
 //        $o_path = ($_SERVER['SERVER_NAME'] === '' ? '/usr/local/bin/' : '') . $this->appPath . $this->ffmpegPath;
 
-        //$_SERVER['SERVER_NAME'] used to be set
-        if ($_SERVER['SERVER_NAME'] === '') {
-            //local
-            $o_path = '/usr/local/bin';
-        } else {
-            //server
-            $o_path = $this->appPath . $this->ffmpegPath;
-        }
-
         if ($para === '-' || $para === '') {
             $subdir = '';
         } else {
             $subdir = $para . "/";
         }
 
-        $dir = $this->appPath . $this->songPath . $subdir;
+        //$_SERVER['SERVER_NAME'] used to be set
+        if ($_SERVER['SERVER_NAME'] === '') {
+            //local
+            $dir = 'storage/data/' . $subdir;
+            $o_path = '/usr/local/bin/ffmpeg';
+        } else {
+            //server
+            $dir = $this->appPath . $this->songPath . $subdir;
+            $o_path = $this->appPath . $this->ffmpegPath;
+        }
 
         //mp3 compression
         if ($typ === 'audio/mpeg') {
@@ -71,7 +70,7 @@ class TunesService
                 unlink($dir . $song_name);
             } else {
                 Log::warning('mp3 compression for '.$song_name.' failed. Code: '.$r.' fullpath: '.$dir . $song_name);
-                Log::info($o_path . $dir . $song_name . ' -ab 110k ' . $dir . '_' . $song_name);
+                Log::info($o_path . ' -i' . $dir . $song_name . ' -ab 110k ' . $dir . '_' . $song_name);
                 return false;
             }
 

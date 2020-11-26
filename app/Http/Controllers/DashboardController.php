@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\App;
 use App\Services\UrlService;
 use App\Models\Page;
 use App\Models\Tune;
+use phpDocumentor\Reflection\Types\Void_;
 
 class DashboardController extends Controller
 {
@@ -65,10 +66,12 @@ class DashboardController extends Controller
 
         $this->tunesService->upload($request, $para);
 
+
         return redirect($para);
     }
 
-    public function dl() {
+    public function dl()
+    {
         try {
             // return Storage::download(app_path('../public/storage/data/'.$_GET['song']));
             return Response()->download('storage/data/'.$_GET['song']);
@@ -85,6 +88,10 @@ class DashboardController extends Controller
             Log::error('delete failed for '. $_GET['song']. ' '.$e->getMessage());
             return "";
         }
+
+        //remove db record
+        Tune::destroy(Tune::where('name', $_GET['song'])->first()->id);
+
         return 'deleted';
     }
 
@@ -117,6 +124,10 @@ class DashboardController extends Controller
         $page_id = Page::where([
             ['name', isset($_GET['page']) ? $_GET['page'] : '/'],
         ])->get('id')->first()->id;
+
+        $t = Tune::where([
+            ['name', $_GET['name']]
+        ])->first();
 
         Tune::where([
             ['name', $_GET['name']]

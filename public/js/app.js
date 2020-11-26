@@ -2261,8 +2261,8 @@ __webpack_require__.r(__webpack_exports__);
       this.src.connect(this.convolverGain);
       this.src.connect(this.gain);
       this.gain.connect(this.filter).connect(this.notch).connect(this.masterCompression);
-      this.masterCompression.connect(this.ctx.destination); //start from
-
+      this.masterCompression.connect(this.ctx.destination);
+      this.playFrom = _meths_js__WEBPACK_IMPORTED_MODULE_0__["default"].findMarker(this.pos, "start") / window.innerWidth;
       var duration = this.src.buffer.duration;
       var offset = duration * this.playFrom;
       var endset = duration * this.playTo;
@@ -2405,11 +2405,11 @@ __webpack_require__.r(__webpack_exports__);
       this.loaded = false;
     },
     playSelection: function playSelection(which, value) {
-      if (which === "startScale") {
+      if (which === "s") {
         this.playFrom = value;
       }
 
-      if (which === "endScale") {
+      if (which === "e") {
         this.playTo = value > 0.98 ? 1 : value;
       }
     },
@@ -55221,6 +55221,12 @@ __webpack_require__.r(__webpack_exports__);
   //which: startScale or endScale
   getMarkersPath: function getMarkersPath(para, name, which) {
     return 'get?which=' + which + "&position=" + name;
+  },
+  //check markers position
+  findMarker: function findMarker(pos, which) {
+    console.log('fm', 'div-' + which + '-' + pos);
+    var marker = document.getElementById('div-' + which + '-' + pos);
+    return marker.offsetLeft;
   }
 });
 

@@ -213,7 +213,8 @@ export default {
       this.gain.connect(this.filter).connect(this.notch).connect(this.masterCompression);
       this.masterCompression.connect(this.ctx.destination);
 
-      //start from
+      this.playFrom = Meths.findMarker(this.pos, "start") / window.innerWidth;
+
       var duration = this.src.buffer.duration;
       var offset = duration * this.playFrom;
       var endset = duration * this.playTo;
@@ -389,11 +390,10 @@ export default {
     },
 
     playSelection: function(which, value) {
-
-      if (which === "startScale") {
+      if (which === "s") {
         this.playFrom = value;
       }
-      if (which === "endScale") {
+      if (which === "e") {
         this.playTo = value > 0.98 ? 1 : value;
       }
     },
