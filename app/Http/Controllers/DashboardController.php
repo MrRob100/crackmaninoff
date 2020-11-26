@@ -59,7 +59,7 @@ class DashboardController extends Controller
 
         $t_string = implode(' ', $tunes);
 
-        $pages = Page::pluck('name');
+        $pages = Page::all()->whereIn('id', Tune::pluck('page_id'))->pluck('name');
 
         return view('dashboard', compact('t_string', 'para', 'pages'));
     }
