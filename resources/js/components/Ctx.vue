@@ -1,6 +1,5 @@
 <template>
     <div v-if="tunes">
-
         <div class="switcher row to-blur">
             <div>
                 <label class="switch">

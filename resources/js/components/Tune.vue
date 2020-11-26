@@ -203,9 +203,7 @@ export default {
       }
 
       this.src.buffer = this.myBuffer;
-
       this.src.loop = !this.playlist;
-
       this.gain.gain.value = 0.5;
 
       this.src.connect(this.convolverGain);

@@ -59,7 +59,9 @@ class DashboardController extends Controller
 
         $t_string = implode(' ', $tunes);
 
-        return view('dashboard', compact('t_string', 'para'));
+        $pages = Page::pluck('name');
+
+        return view('dashboard', compact('t_string', 'para', 'pages'));
     }
 
     public function upload(Request $request, $para) {

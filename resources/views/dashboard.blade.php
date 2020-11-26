@@ -8,14 +8,15 @@
             <input id="song-file-input" type="file" name="song" onchange="ch()">
         </form>
         <i class="fa fa-info-circle info-icon" aria-hidden="true"></i>
-
     </div>
 
-    {{-- <span>Pages:</span>
+    <div class="to-blur mb-3 mx-3">
         <a href='{{ url('') }}'><p class="o-page">home</p></a>
-        @foreach ($subdirs as $subdir)
-            <a href='{{ $subdir[0] }}'><p class="o-page">{{ $subdir[0] }}</p></a>
-        @endforeach --}}
+        @foreach ($pages as $page)
+            <a href='{{ $page }}'><p class="o-page">{{ $page }}</p></a>
+        @endforeach
+    </div>
+
     <Ctx
         tunes="{{ $t_string }}"
         para="{{ $para }}"
