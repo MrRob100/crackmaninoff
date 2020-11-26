@@ -55223,7 +55223,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   //check markers position
   findMarker: function findMarker(pos, which) {
-    console.log('fm', 'div-' + which + '-' + pos);
     var marker = document.getElementById('div-' + which + '-' + pos);
     return marker.offsetLeft;
   }
