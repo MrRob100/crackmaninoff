@@ -134,13 +134,11 @@ export default {
         this.convolver.disconnect();
 
         //if not cached / loaded...
-
         if (!this.src) {
           this.getSource();
         } else {
           this.connectAndPlay();
         }
-
       }
     },
 
@@ -199,6 +197,8 @@ export default {
           if (!isso.stopClicked) {
               Layout.stopped(isso.pos);
               isso.$emit('ended', isso.pos);
+              isso.playing = false;
+              isso.ableToPlay = true;
           }
       }
 
@@ -353,7 +353,6 @@ export default {
         clearInterval(modInt);
         isso.stopProcess();
       }
-
     },
 
     canvasWidth: function() {
@@ -384,7 +383,6 @@ export default {
       this.convolver.disconnect();
       this.playing = false;
       this.loaded = false;
-
     },
 
     playSelection: function(which, value) {

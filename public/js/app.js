@@ -2251,6 +2251,8 @@ __webpack_require__.r(__webpack_exports__);
         if (!isso.stopClicked) {
           _layoutChanges_js__WEBPACK_IMPORTED_MODULE_1__["default"].stopped(isso.pos);
           isso.$emit('ended', isso.pos);
+          isso.playing = false;
+          isso.ableToPlay = true;
         }
       };
 
