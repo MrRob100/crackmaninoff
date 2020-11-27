@@ -185,6 +185,7 @@ html, body {
     /* touch-action: none; */
     background-color: rgb(50, 2, 95) !important;
     font-family: 'Courier New', Courier, monospace !important;
+    font-weight: 500 !important;
 }
 body {
     width: 100%;

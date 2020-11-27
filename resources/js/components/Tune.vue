@@ -63,7 +63,7 @@ export default {
       screenWidth: "",
       nameTrimmed: "",
       playFrom: "",
-      playTo: "",
+      playTo: 1,
       ableToPlay: true,
       first: true,
       dlref: "",
