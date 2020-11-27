@@ -4,7 +4,10 @@
     @click="deleteSong"
     class="delete-button"
     >DELETE</h3>
-    <div class="stack-house to-blur">
+    <div
+        class="stack-house to-blur"
+        :class='"no-blur-" + pos'
+    >
       <div
       @click="play"
       :id='"stack-" + pos'
@@ -437,16 +440,29 @@ export default {
       context.fillRect(i,(1+min)*amp,1,Math.max(1,(max-min)*amp));
       }
     },
-
   },
 
     watch: {
       run: function(val) {
-          var isso = this;
           if (val == this.pos) {
               this.play();
           }
-      }
+      },
+
+      playFrom: function(val) {
+          //NEED TO REUSE
+          if (this.src) {
+              this.src.loopStart = this.src.buffer.duration * val;
+          }
+      },
+
+      playTo: function(val) {
+          //NEED TO REUSE
+          if (this.src) {
+              this.src.loopEnd = this.src.buffer.duration * val;
+          }
+      },
+
     }
 };
 </script>

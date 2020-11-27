@@ -13,18 +13,23 @@
             </div>
         </div>
 
-      <div class="slither" v-for="(tune, index) in tunesFormatted" :key="tune">
+      <div class="slither"
+           v-for="(tune, index) in tunesFormatted"
+           :key="tune"
+      >
         <tune
-        @ended="endHandler"
-        @able="setPlayable"
-        :playable="playable"
-        :playlist="playlist"
-        :ctx="ctx"
-        :para="para"
-        :name="tune"
-        :pos="index"
-        :run="run"
-        :lastOne="tunesFormatted.length"
+            class="slither-class"
+            :id="'slither-' + index"
+            @ended="endHandler"
+            @able="setPlayable"
+            :playable="playable"
+            :playlist="playlist"
+            :ctx="ctx"
+            :para="para"
+            :name="tune"
+            :pos="index"
+            :run="run"
+            :lastOne="tunesFormatted.length"
         ></tune>
       </div>
 
@@ -472,6 +477,11 @@ input:checked + .slider:before {
 
 .pr {
     margin-top: 0.4rem;
+}
+
+.slither-class {
+    width: 100%;
+    top: calc(100% - 40px);
 }
 
 </style>
