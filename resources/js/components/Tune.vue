@@ -91,12 +91,13 @@ export default {
     var stop = document.getElementById("stbutton-" + isso.pos);
 
 
+    //NEED TO LOSE THE PUBLIC
     if (this.para == "-") {
-      isso.dlref = window.location.origin + "/download?song=" + isso.name;
+      isso.dlref = window.location.origin + "public/download?song=" + isso.name;
     } else {
-      isso.dlref = window.location.origin + "/download?song=" + isso.para + "/" + isso.name;
+      isso.dlref = window.location.origin + "public/download?song=" + isso.para + "/" + isso.name;
     }
-      
+
     this.convolver = isso.ctx.createConvolver();
     this.convolverGain = isso.ctx.createGain();
 
