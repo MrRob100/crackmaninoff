@@ -31,7 +31,7 @@
         >
         <button
         class="dld"
-        v-on:click="dl">
+        v-on:click="download">
         <img data-toggle="tooltip" title="download" class="crack-icon dl-icon" src="images/dld.png">
         </button>
         </a>
@@ -86,16 +86,12 @@ export default {
   mounted() {
 
     var isso = this;
-    var body = document.querySelector("body");
-    var close = document.getElementById("modal-close-" + isso.pos);
-    var stop = document.getElementById("stbutton-" + isso.pos);
-
 
     //NEED TO LOSE THE PUBLIC
     if (this.para == "-") {
-      isso.dlref = window.location.origin + "public/download?song=" + isso.name;
+      isso.dlref = window.location.origin + "/public/download?song=" + isso.name;
     } else {
-      isso.dlref = window.location.origin + "public/download?song=" + isso.para + "/" + isso.name;
+      isso.dlref = window.location.origin + "/public/download?song=" + isso.para + "/" + isso.name;
     }
 
     this.convolver = isso.ctx.createConvolver();
@@ -397,7 +393,7 @@ export default {
       this.nameTrimmed = this.name.length > scale - 7 ? this.name.substr(0, scale - 7) + "..." : this.name;
     },
 
-    dl: function() {
+    download: function() {
 
         var isso = this;
 
