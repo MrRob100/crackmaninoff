@@ -23,7 +23,6 @@ Vue.config.devtools = true;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('howltest', require('./components/Howltest.vue').default);
 Vue.component('tune-crop', require('./components/TuneCrop.vue').default);
 Vue.component('tune', require('./components/Tune.vue').default);
 Vue.component('ctx', require('./components/Ctx.vue').default);

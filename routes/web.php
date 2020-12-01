@@ -14,8 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//download
+Route::get('/download', [DashboardController::class, 'download']);
+
 //delete
-Route::get('/del', [DashboardController::class, 'delete']);
+Route::get('/delete', [DashboardController::class, 'delete']);
 
 //markers
 Route::get('/get', 'DashboardController@getMarker');
@@ -33,5 +36,3 @@ Route::get('/{para?}', [DashboardController::class,'index'])->name('dashboard');
 Route::post('/{para?}', [DashboardController::class, 'upload'])->name('upload-song');
 
 Auth::routes();
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');

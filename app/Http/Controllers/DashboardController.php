@@ -4,14 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Services\TunesService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\App;
-use App\Services\UrlService;
 use App\Models\Page;
 use App\Models\Tune;
-use phpDocumentor\Reflection\Types\Void_;
 
 class DashboardController extends Controller
 {
@@ -72,10 +68,9 @@ class DashboardController extends Controller
         return redirect($para);
     }
 
-    public function dl()
+    public function download()
     {
         try {
-            // return Storage::download(app_path('../public/storage/data/'.$_GET['song']));
             return Response()->download('storage/data/'.$_GET['song']);
         } catch (exception $e) {
             log::error('error downloading' . $_GET['song'] .' '. $e->getMessage());

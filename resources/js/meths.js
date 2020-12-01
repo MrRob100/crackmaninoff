@@ -7,7 +7,7 @@ export default {
     },
 
     deleteSongPath(para, name) {
-        return 'del?song=' + name + '&para=' + para;
+        return 'delete?song=' + name + '&para=' + para;
     },
 
     //which: startScale or endScale

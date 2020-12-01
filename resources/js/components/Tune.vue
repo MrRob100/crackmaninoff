@@ -92,17 +92,11 @@ export default {
 
 
     if (this.para == "-") {
-      isso.dlref = window.location.origin + "/dl?song=" + isso.name;
+      isso.dlref = window.location.origin + "/download?song=" + isso.name;
     } else {
-      isso.dlref = window.location.origin + "/dl?song=" + isso.para + "/" + isso.name;
+      isso.dlref = window.location.origin + "/download?song=" + isso.para + "/" + isso.name;
     }
-
-    var source;
-    var myBuffer;
-    var myImpulseBuffer;
-    var impulseRequest;
-    var impulseConvolver = isso.ctx.createConvolver();
-
+      
     this.convolver = isso.ctx.createConvolver();
     this.convolverGain = isso.ctx.createGain();
 
@@ -413,9 +407,7 @@ export default {
     },
 
     deleteSong: function() {
-
       var request = new XMLHttpRequest();
-
       var path = Meths.deleteSongPath(this.para, this.name);
 
       request.open('GET', path, true);
