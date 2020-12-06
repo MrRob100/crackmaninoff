@@ -80,7 +80,7 @@ class TunesService
 
             //deletes raw if conversion worked
             if ($rc === 0) {
-                unlink($dir . $song_name);
+//                unlink($dir . $song_name);
             } else {
                 Log::warning('wav conversion for '.$song_name.' failed');
                 return false;
