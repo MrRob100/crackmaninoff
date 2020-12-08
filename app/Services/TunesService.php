@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 class TunesService
 {
-    protected $appPath = '/home/u1269-rdkn8kbgg4s7/www/roba6.sg-host.com';
+    protected $appPath = '/home/u1050-a6xqjx3tg3dg/www/crackmaninoff.com';
 
     protected $songPath = '/public_html/public/storage/data/';
 
