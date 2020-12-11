@@ -32,7 +32,7 @@
         <button
         class="dld"
         v-on:click="download">
-        <img data-toggle="tooltip" title="download" class="crack-icon dl-icon" src="images/dld.png">
+        <img data-toggle="tooltip" title="download" class="crack-icon dl-icon" src="public/images/dld.png">
         </button>
         </a>
       </div>
