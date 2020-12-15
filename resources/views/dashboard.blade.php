@@ -21,6 +21,7 @@
         tunes="{{ $t_string }}"
         para="{{ $para }}"
         img-path="{{ env("IMG_PATH") }}"
+        storage-path="{{ env("STORAGE_PATH") }}"
     ></Ctx>
 
 @endsection

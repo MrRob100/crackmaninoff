@@ -105,7 +105,7 @@ class TunesService
             //removes spaces in name
             $song_name = str_replace(" ", "_", $file->getClientOriginalName());
             $request->file('song')->store('upload');
-            $file->move('storage/data/' . ($para === '-' ? '' : $para), $song_name);
+            $file->move(env('STORAGE_PATH') . ($para === '-' ? '' : $para), $song_name);
             if (!$this->compressConvertFile($para, $song_name, $typ)) {
                 return false;
             }

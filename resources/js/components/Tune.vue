@@ -47,6 +47,7 @@ import Layout from '../layoutChanges.js';
 
 export default {
   props: [
+    "storage-path",
     "img-path",
     "playable",
     "playlist",
@@ -143,7 +144,7 @@ export default {
       var subdir = this.para !== "-" ? this.para + "/" + this.name : "" + this.name;
 
       //fancy path get
-      var sourceUrl = "storage/data/" + subdir;
+      var sourceUrl = this.storagePath + subdir;
 
       this.loading = true;
 

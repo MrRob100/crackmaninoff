@@ -81,7 +81,7 @@
 
 export default {
 
-    props: ["tunes", "para", "img-path"],
+    props: ["tunes", "para", "img-path", "storage-path"],
 
     data: function() {
         return {
