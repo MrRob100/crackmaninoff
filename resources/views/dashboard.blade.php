@@ -20,6 +20,7 @@
     <Ctx
         tunes="{{ $t_string }}"
         para="{{ $para }}"
+        img-path="{{ env("IMG_PATH") }}"
     ></Ctx>
 
 @endsection

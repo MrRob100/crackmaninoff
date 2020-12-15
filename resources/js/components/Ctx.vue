@@ -18,6 +18,7 @@
            :key="tune"
       >
         <tune
+            :img-path="imgPath"
             class="slither-class"
             :id="'slither-' + index"
             @ended="endHandler"
@@ -80,7 +81,7 @@
 
 export default {
 
-    props: ['tunes', 'para'],
+    props: ["tunes", "para", "img-path"],
 
     data: function() {
         return {

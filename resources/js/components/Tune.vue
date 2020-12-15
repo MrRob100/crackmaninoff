@@ -32,7 +32,7 @@
         <button
         class="dld"
         v-on:click="download">
-        <img data-toggle="tooltip" title="download" class="crack-icon dl-icon" src="public/images/dld.png">
+        <img data-toggle="tooltip" title="download" class="crack-icon dl-icon" :src="imgPath + '/dld.png'">
         </button>
         </a>
       </div>
@@ -47,6 +47,7 @@ import Layout from '../layoutChanges.js';
 
 export default {
   props: [
+    "img-path",
     "playable",
     "playlist",
     "ctx",
@@ -140,6 +141,8 @@ export default {
 
       //source and impulse
       var subdir = this.para !== "-" ? this.para + "/" + this.name : "" + this.name;
+
+      //fancy path get
       var sourceUrl = "storage/data/" + subdir;
 
       this.loading = true;
@@ -236,6 +239,8 @@ export default {
     getImpulse: function() {
       var impulseConvolver = this.ctx.createConvolver();
       var impulseRequest = new XMLHttpRequest();
+
+      //do fancy url get
       var impulseUrl = "storage/data/tenniscourt.wav";
 
       impulseRequest.open("GET", impulseUrl, true);

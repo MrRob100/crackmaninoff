@@ -187,8 +187,11 @@ export default {
 
               if (which === "e") {
                   var endPoint = response.data[0].end;
-                  isso.end = endPoint * 100 + "%";
-                  isso.$emit('setEnd', which, endPoint);
+
+                  if (endPoint) {
+                      isso.end = endPoint * 100 + "%";
+                      isso.$emit('setEnd', which, endPoint);
+                  }
               }
           } else {
               // 0 data

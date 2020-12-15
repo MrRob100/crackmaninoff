@@ -42,27 +42,18 @@ class TunesService
 
     public function compressConvertFile($para, $song_name, $typ)
     {
-//        $o_path = ($_SERVER['SERVER_NAME'] === '' ? '/usr/local/bin/' : '') . $this->appPath . $this->ffmpegPath;
-
         if ($para === '-' || $para === '') {
             $subdir = '';
         } else {
             $subdir = $para . "/";
         }
 
-        //$_SERVER['SERVER_NAME'] used to be set
-        if ($_SERVER['SERVER_NAME'] === '') {
-            //local
-            $dir = 'storage/data/' . $subdir;
-            $o_path = '/usr/local/bin/ffmpeg';
-        } else {
-            //server
-            $dir = $this->appPath . $this->songPath . $subdir;
-            $o_path = $this->appPath . $this->ffmpegPath;
-        }
+        $dir = env('APP_PATH') . env('SONG_PATH') . $subdir;
+        $o_path = env('APP_PATH') . env('FFMPEG_PATH');
 
         //mp3 compression
         if ($typ === 'audio/mpeg') {
+
             exec($o_path . ' -i ' . $dir . $song_name . ' -ab 110k ' . $dir . '_' . $song_name, $o, $r);
 
             //deletes raw if compression worked
@@ -70,7 +61,7 @@ class TunesService
                 unlink($dir . $song_name);
             } else {
                 Log::warning('mp3 compression for '.$song_name.' failed. Code: '.$r.' fullpath: '.$dir . $song_name);
-                Log::info($o_path . ' -i' . $dir . $song_name . ' -ab 110k ' . $dir . '_' . $song_name);
+                Log::info($o_path . ' -i ' . $dir . $song_name . ' -ab 110k ' . $dir . '_' . $song_name);
                 return false;
             }
 
@@ -80,7 +71,7 @@ class TunesService
 
             //deletes raw if conversion worked
             if ($rc === 0) {
-//                unlink($dir . $song_name);
+                unlink($dir . $song_name);
             } else {
                 Log::warning('wav conversion for '.$song_name.' failed');
                 return false;
