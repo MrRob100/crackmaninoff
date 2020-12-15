@@ -28,10 +28,10 @@ class DashboardController extends Controller
 
         ini_set('max_post_size', 0);
 
-        if (!file_exists('storage/data/'.$para)) {
+        if (!file_exists(env('STORAGE_PATH').$para)) {
             //make it self destruct
-            mkdir('storage/data/'.$para);
-            chmod('storage/data/'.$para, 0777);
+            mkdir(env('STORAGE_PATH').$para);
+            chmod(env('STORAGE_PATH').$para, 0777);
         }
 
         //save new page WORK ON THIS
@@ -41,14 +41,14 @@ class DashboardController extends Controller
 
         $para_a = $para == "" ? "" : $para."/";
 
-        $tunes_ordered = glob('storage/data/'.$para_a.'*.mp3');
+        $tunes_ordered = glob(env('STORAGE_PATH').$para_a.'*.mp3');
         usort($tunes_ordered, function($a, $b) {
             return filemtime($a) < filemtime($b);
         });
 
         $tunes = [];
         foreach ($tunes_ordered as $tune_ordered) {
-            $tunes[] = str_replace('storage/data/'.$para_a, '', $tune_ordered);
+            $tunes[] = str_replace(env('STORAGE_PATH').$para_a, '', $tune_ordered);
         }
 
         $para = $para == "" ? '-' : $para;

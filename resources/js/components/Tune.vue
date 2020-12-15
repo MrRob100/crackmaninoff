@@ -169,7 +169,6 @@ export default {
             isso.myBuffer = buffer;
 
             isso.connectAndPlay();
-
           },
 
           function(e) {

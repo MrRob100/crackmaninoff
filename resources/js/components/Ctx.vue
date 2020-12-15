@@ -18,6 +18,7 @@
            :key="tune"
       >
         <tune
+            :storage-path="storagePath"
             :img-path="imgPath"
             class="slither-class"
             :id="'slither-' + index"
