@@ -43,7 +43,7 @@ class DashboardController extends Controller
 
         $tunes_ordered = glob(env('STORAGE_PATH').$para_a.'*.mp3');
         usort($tunes_ordered, function($a, $b) {
-            return filemtime($a) < filemtime($b);
+            return filemtime($a) < filemtime($b) ? 1 : 0;
         });
 
         $tunes = [];
