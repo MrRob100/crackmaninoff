@@ -31,6 +31,8 @@ class DashboardController extends Controller
         if (!file_exists(env('STORAGE_PATH').$para)) {
             //make it self destruct
 
+            dd(env('STORAGE_PATH').$para);
+
             mkdir(env('STORAGE_PATH').$para);
             chmod(env('STORAGE_PATH').$para, 0777);
         }
