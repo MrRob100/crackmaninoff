@@ -144,6 +144,9 @@ export default {
       var subdir = this.para !== "-" ? this.para + "/" + this.name : "" + this.name;
 
       //fancy path get
+
+      console.log('sp', this.storagePath);
+
       var sourceUrl = this.storagePath + subdir;
 
       this.loading = true;

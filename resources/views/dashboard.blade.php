@@ -24,6 +24,8 @@
         storage-path="{{ env("STORAGE_PATH") }}"
     ></Ctx>
 
+    <p>{{ env("STORAGE_PATH") }}</p>
+
 @endsection
 
 <script>
