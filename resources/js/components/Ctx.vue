@@ -101,7 +101,7 @@ export default {
         const audioCtx = new AudioContext();
         this.ctx = audioCtx;
         this.tunesFormatted = this.tunes.split(" ");
-        
+
         const loopUrl = this.storagePath + "tenniscourt.wav";
 
         const source = audioCtx.createBufferSource();
@@ -188,6 +188,8 @@ html, body {
     background-color: rgb(50, 2, 95) !important;
     font-family: 'Courier New', Courier, monospace !important;
     font-weight: 500 !important;
+    /* Disables pull-to-refresh but allows overscroll glow effects. */
+    overscroll-behavior-y: contain;
 }
 body {
     width: 100%;
