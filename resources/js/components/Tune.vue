@@ -143,10 +143,6 @@ export default {
       //source and impulse
       var subdir = this.para !== "-" ? this.para + "/" + this.name : "" + this.name;
 
-      //fancy path get
-
-      console.log('sp', this.storagePath);
-
       var sourceUrl = this.storagePath + subdir;
 
       this.loading = true;
@@ -244,7 +240,7 @@ export default {
       var impulseRequest = new XMLHttpRequest();
 
       //do fancy url get
-      var impulseUrl = "storage/data/tenniscourt.wav";
+      var impulseUrl = this.storagePath + "tenniscourt.wav";
 
       impulseRequest.open("GET", impulseUrl, true);
       impulseRequest.responseType = "arraybuffer";

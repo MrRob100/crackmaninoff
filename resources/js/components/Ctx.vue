@@ -101,8 +101,8 @@ export default {
         const audioCtx = new AudioContext();
         this.ctx = audioCtx;
         this.tunesFormatted = this.tunes.split(" ");
-
-        const loopUrl = 'storage/data/tenniscourt.wav';
+        
+        const loopUrl = this.storagePath + "tenniscourt.wav";
 
         const source = audioCtx.createBufferSource();
 
