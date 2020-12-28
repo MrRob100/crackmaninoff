@@ -30,6 +30,11 @@ Route::get('/set', [DashboardController::class, 'setMarker']);
 //index
 Route::view('/test', 'test');
 
+Route::get('/running', function() {
+    return view('running');
+});
+
+
 Route::get('/{para?}', [DashboardController::class,'index'])->name('dashboard');
 
 //upload
