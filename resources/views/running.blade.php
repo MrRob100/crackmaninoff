@@ -8,7 +8,7 @@
 @endsection
 
 <script>
-    
+
     function request() {
         if (typeof DeviceMotionEvent.requestPermission === 'function') {
             DeviceMotionEvent.requestPermission()
@@ -27,9 +27,7 @@
                             speedX += event.acceleration.x / 1000 * ((currentTime - lastTimestamp)/1000)/3600;
                             //... same for Y and Z
                             lastTimestamp = currentTime;
-
-                            console.log('sx', speedX);
-
+                            
                         }, false);
 
                     }
