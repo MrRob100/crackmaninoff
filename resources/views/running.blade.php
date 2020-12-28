@@ -7,6 +7,9 @@
 @endsection
 
 <script>
+
+    console.log('run');
+
     var lastTimestamp;
     var speedX = 0, speedY = 0, speedZ = 0;
     window.addEventListener('devicemotion', function(event) {
