@@ -32,10 +32,9 @@
                             speedY += event.acceleration.y / 1000 * ((currentTime - lastTimestamp)/1000)/3600;
                             speedZ += event.acceleration.z / 1000 * ((currentTime - lastTimestamp)/1000)/3600;
 
-                            document.getElementById('speedx').innerText = "x: " + speedX;
-                            document.getElementById('speedy').innerText = "y: " + speedY;
-                            document.getElementById('speedz').innerText = "z: " + speedZ;
-
+                            document.getElementById('speedx').innerText = "ax: " + event.acceleration.x;
+                            document.getElementById('speedy').innerText = "ay: " + event.acceleration.y;
+                            document.getElementById('speedz').innerText = "az: " + event.acceleration.z;
 
                             //... same for Y and Z
                             lastTimestamp = currentTime;
