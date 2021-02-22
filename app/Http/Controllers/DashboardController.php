@@ -80,7 +80,7 @@ class DashboardController extends Controller
     public function delete() {
         $para = $_GET['para'] == '-' ? '' : $_GET['para'].'/';
         try {
-            unlink('storage/data/'.$para.$_GET['song']);
+            unlink('public/storage/data/'.$para.$_GET['song']);
         } catch (exception $e) {
             Log::error('delete failed for '. $_GET['song']. ' '.$e->getMessage());
             return "";
@@ -110,30 +110,30 @@ class DashboardController extends Controller
 
     public function setMarker() {
 
-        if ($_GET['se'] === 's') {
-            $which = 'start';
-        } elseif ($_GET['se'] === 'e') {
-            $which = 'end';
-        } else {
-            $which = null;
-        }
-
-        $page_id = Page::where([
-            ['name', isset($_GET['page']) ? $_GET['page'] : '/'],
-        ])->get('id')->first()->id;
-
-        $t = Tune::where([
-            ['name', $_GET['name']]
-        ])->first();
-
-        Tune::where([
-            ['name', $_GET['name']]
-            ])->update(
-            [
-                $which => $_GET['value'],
-                'page_id' => $page_id
-            ]
-        );
+//        if ($_GET['se'] === 's') {
+//            $which = 'start';
+//        } elseif ($_GET['se'] === 'e') {
+//            $which = 'end';
+//        } else {
+//            $which = null;
+//        }
+//
+//        $page_id = Page::where([
+//            ['name', isset($_GET['page']) ? $_GET['page'] : '/'],
+//        ])->get('id')->first()->id;
+//
+//        $t = Tune::where([
+//            ['name', $_GET['name']]
+//        ])->first();
+//
+//        Tune::where([
+//            ['name', $_GET['name']]
+//            ])->update(
+//            [
+//                $which => $_GET['value'],
+//                'page_id' => $page_id
+//            ]
+//        );
     }
 
     public function ctx() {
