@@ -21,19 +21,22 @@ Route::get('/download', [DashboardController::class, 'download']);
 Route::get('/delete', [DashboardController::class, 'delete']);
 
 //markers
-Route::get('/get', 'DashboardController@getMarker');
 Route::get('/get', [DashboardController::class, 'getMarker']);
 
-Route::get('/set', 'DashboardController@setMarker');
 Route::get('/set', [DashboardController::class, 'setMarker']);
 
-//index
-Route::view('/test', 'test');
+//tests
+Route::get('/dfx', function() {
+    return view('dfx');
+});
 
 Route::get('/running', function() {
     return view('running');
 });
 
+Route::get('/streaming', function() {
+    return view('streaming');
+});
 
 Route::get('/{para?}', [DashboardController::class,'index'])->name('dashboard');
 
