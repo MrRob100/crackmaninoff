@@ -57,20 +57,20 @@
         </div>
         <div class="bottom-container">
             <div class="crow cbottom-row">
-                    <span class="speed-value">0</span>
-                    <span class="reverb-value">0</span>
-                    <span class="filter-value">0</span>
-                    <span class="mod-value">0</span>
+                    <span class="font-weight-bold speed-value">0</span>
+                    <span class="font-weight-bold reverb-value">0</span>
+                    <span class="font-weight-bold filter-value">0</span>
+                    <span class="font-weight-bold mod-value">0</span>
             </div>
             <div class="crow cbottom-row">
-                    <span class="fx-label">Speed</span>
-                    <span class="fx-label">Reverb</span>
-                    <span class="fx-label">Filter</span>
-                    <span class="fx-label">Modulation</span>
+                    <span class="font-weight-bold fx-label">Speed</span>
+                    <span class="font-weight-bold fx-label">Reverb</span>
+                    <span class="font-weight-bold fx-label">Filter</span>
+                    <span class="font-weight-bold fx-label">Modulation</span>
             </div>
         </div>
         <div class="crow cstop" v-for="(tune, index) in tunesFormatted" :key="tune">
-            <button :id='"stbutton-"+index'>Stop</button>
+            <button class="font-weight-bold" :id='"stbutton-"+index'>Stop</button>
         </div>
 
       </div>

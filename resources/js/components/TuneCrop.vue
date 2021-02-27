@@ -103,7 +103,6 @@ export default {
                 isso.settingEnd = false;
               }, 2000);
             }
-
         }
 
         if (endx >= startx) {

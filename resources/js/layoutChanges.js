@@ -38,6 +38,7 @@ export default {
             if (!item.classList.contains("no-blur-" + pos)) {
                 item.style.filter = "blur(5px)";
                 item.style.cursor = "initial";
+                item.style.display = "none";
             }
         }
 
@@ -50,6 +51,7 @@ export default {
         for (let item of toBlur) {
             item.style.filter = "none";
             item.style.cursor = "pointer";
+            item.style.display = "block";
         }
 
         var move = document.getElementById("slither-" + pos);
