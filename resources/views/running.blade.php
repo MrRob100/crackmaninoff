@@ -3,9 +3,9 @@
 @section('content')
 
     <h1>RUNNING</h1>
-    <p id="speedx">x: 0</p>
-    <p id="speedy">y: 0</p>
-    <p id="speedz">z: 0</p>
+    <p id="speedx">ax: 0</p>
+    <p id="speedy">ay: 0</p>
+    <p id="speedz">az: 0</p>
     <button onclick="request()">Permission</button>
     <button onclick="music()">Music</button>
 
