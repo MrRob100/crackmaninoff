@@ -2,6 +2,11 @@
 
 @section('content')
 
+    @if(auth()->user())
+        <h1>AUTH USER</h1>
+    @else
+        <h1>ELSE</h1>
+    @endif
     <div class="contr to-blur">
         <form class="upl" id="song-upload" action="{{ $para }}" method="post" enctype="multipart/form-data">
             {!! csrf_field() !!}

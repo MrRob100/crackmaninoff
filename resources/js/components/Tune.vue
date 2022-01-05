@@ -240,7 +240,7 @@ export default {
       var impulseRequest = new XMLHttpRequest();
 
       //do fancy url get
-      var impulseUrl = this.storagePath + "tenniscourt.wav";
+      var impulseUrl = this.storagePath + "reberb.wav";
 
       impulseRequest.open("GET", impulseUrl, true);
       impulseRequest.responseType = "arraybuffer";
@@ -292,6 +292,7 @@ export default {
           speedValue.innerHTML = Math.floor(speedControl.value * 100) + "%";
 
           isso.convolverGain.gain.value = reverbControl.value;
+
           reverbValue.innerHTML = Math.floor(reverbControl.value * 100) + "%";
 
           isso.filter.frequency.value = filterControl.value < 20000 ? filterControl.value / 4 : filterControl.value;

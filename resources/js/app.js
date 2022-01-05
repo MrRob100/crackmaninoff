@@ -12,10 +12,6 @@ global.$ = global.jQuery = require('jquery');
 window.Vue = require('vue');
 Vue.config.devtools = true;
 
-import Particles from "particles.vue";
-
-Vue.use(Particles);
-
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
