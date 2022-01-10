@@ -31,9 +31,6 @@ export default {
 
     var isso = this;
 
-    isso.getMarker("s");
-    isso.getMarker("e");
-
     var nonHeadStart = document.getElementById("div-start-" + isso.setting);
     var nonHeadEnd = document.getElementById("div-end-" + isso.setting);
 
@@ -96,7 +93,6 @@ export default {
             elmnt.style.left = "calc(100% -  20px)";
 
             if (!isso.settingEnd) {
-              isso.setMarkers('e', endx);
               isso.settingEnd = true;
 
               setTimeout(function() {
@@ -134,28 +130,6 @@ export default {
 
         elmnt.style.left = ((elmnt.offsetLeft - pos1) / window.innerWidth) * 100 + "%";
 
-        if (e.toElement) {
-          if (e.toElement.id == "div-start-" + isso.setting + "-header") {
-            isso.setMarkers('s', e.clientX);
-          }
-
-          if (e.toElement.id == "div-end-" + isso.setting + "-header") {
-            isso.setMarkers('e', e.clientX);
-          }
-        } else {
-          if (e.target.id == "div-start-" + isso.setting + "-header") {
-            isso.setMarkers('s', e.pageX);
-          }
-
-          if (e.target.id == "div-end-" + isso.setting + "-header") {
-            isso.setMarkers('e', e.pageX);
-          }
-        }
-
-        if (pos3 < 10) {
-            isso.setMarkers('s', 0);
-        }
-
         // stop moving when mouse button is released:
         document.onmouseup = null;
         document.onmousemove = null;
@@ -163,58 +137,6 @@ export default {
         document.ontouchmove = null;
       }
     }
-  },
-  methods: {
-
-    //return numeric
-    getMarker: function(which) {
-
-        const isso = this;
-        axios.get("get", {
-          params: {
-              se: which,
-              name: this.name,
-          }
-      }).then(response => {
-
-          if (response.data.length > 0) {
-              if (which === "s") {
-                  var startPoint = response.data[0].start;
-                  isso.start = startPoint * 100;
-                  isso.$emit('setStart', which, startPoint);
-              }
-
-              if (which === "e") {
-                  var endPoint = response.data[0].end;
-
-                  if (endPoint) {
-                      isso.end = endPoint * 100 + "%";
-                      isso.$emit('setEnd', which, endPoint);
-                  }
-              }
-          } else {
-              // 0 data
-          }
-
-      });
-    },
-
-    setMarkers: function(which, value) {
-      var scaledValue = value / window.innerWidth;
-
-        axios.get("set", {
-            params: {
-                name: this.name,
-                se: which,
-                value: scaledValue,
-                page: this.para
-            }
-        }).then(response => {
-            //
-        });
-
-      this.$emit('value', which, scaledValue);
-      }
   }
 };
 </script>

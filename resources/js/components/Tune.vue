@@ -123,9 +123,12 @@ export default {
   methods: {
 
     play: function() {
-      this.$emit('able', false);
-      var prevent = document.getElementById('prevent-' + this.pos);
-      if (!this.playing && this.ableToPlay && !prevent && this.playable && !this.dlding) {
+        let prevent = document.getElementById('prevent-' + this.pos);
+
+        if (!this.playing && this.ableToPlay && !prevent && this.playable && !this.dlding) {
+
+        this.$emit('able', false);
+
         this.ableToPlay = false;
         this.convolver.disconnect();
 
