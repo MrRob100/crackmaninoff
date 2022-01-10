@@ -240,7 +240,7 @@ export default {
       var impulseRequest = new XMLHttpRequest();
 
       //do fancy url get
-      var impulseUrl = this.storagePath + "reberb.wav";
+      var impulseUrl = this.storagePath + "tusk.wav";
 
       impulseRequest.open("GET", impulseUrl, true);
       impulseRequest.responseType = "arraybuffer";
