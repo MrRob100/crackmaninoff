@@ -1,6 +1,6 @@
 <template>
   <div v-if="!deleted">
-      <small v-if="auth" @click="deleteSong" class="delete-button">DELETE</small>
+      <small v-if="auth" @click="deleteSong" class="delete-button to-blur">DELETE</small>
       <div
         class="stack-house to-blur"
         :class='"no-blur-" + pos'
