@@ -1,10 +1,7 @@
 <template>
   <div v-if="!deleted">
-    <h3
-    @click="deleteSong"
-    class="delete-button"
-    >DELETE</h3>
-    <div
+      <small v-if="auth" @click="deleteSong" class="delete-button">DELETE</small>
+      <div
         class="stack-house to-blur"
         :class='"no-blur-" + pos'
     >
@@ -47,6 +44,7 @@ import Layout from '../layoutChanges.js';
 
 export default {
   props: [
+    "auth",
     "storage-path",
     "img-path",
     "playable",

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\App;
 use App\Models\Page;
-use App\Models\Tune;
 
 class DashboardController extends Controller
 {
@@ -55,7 +54,7 @@ class DashboardController extends Controller
 
         $t_string = implode(' ', $tunes);
 
-        $pages = Page::all()->whereIn('id', Tune::pluck('page_id'))->pluck('name');
+        $pages = Page::all()->pluck('name');
 
         return view('dashboard', compact('t_string', 'para', 'pages'));
     }
@@ -85,9 +84,6 @@ class DashboardController extends Controller
             Log::error('delete failed for '. $_GET['song']. ' '.$e->getMessage());
             return "";
         }
-
-        //remove db record
-        Tune::destroy(Tune::where('name', $_GET['song'])->first()->id);
 
         return 'deleted';
     }

@@ -9,9 +9,9 @@ Route::get('/download', [DashboardController::class, 'download']);
 //delete
 Route::get('/delete', [DashboardController::class, 'delete']);
 
+Auth::routes();
+
 Route::get('/{para?}', [DashboardController::class,'index'])->name('dashboard');
 
 //upload
 Route::post('/{para?}', [DashboardController::class, 'upload'])->name('upload-song');
-
-Auth::routes();
