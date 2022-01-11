@@ -99,7 +99,7 @@ export default {
         this.ctx = audioCtx;
         this.tunesFormatted = this.tunes.split(" ");
 
-        const loopUrl = this.storagePath + "tenniscourt.wav";
+        const loopUrl = "tenniscourt.wav";
 
         const source = audioCtx.createBufferSource();
 
