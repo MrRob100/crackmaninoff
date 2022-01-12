@@ -27,10 +27,11 @@ class DashboardController extends Controller
 
         ini_set('max_post_size', 0);
 
-        if (!file_exists(env('STORAGE_PATH').$para)) {
+        if (!file_exists(public_path(). '/songs/' .$para)) {
             //make it self destruct
-            mkdir(env('STORAGE_PATH').$para);
-            chmod(env('STORAGE_PATH').$para, 0777);
+
+            mkdir(public_path(). '/songs/'.$para);
+            chmod(public_path(). '/songs/'.$para, 0777);
         }
 
         //save new page WORK ON THIS
@@ -40,14 +41,14 @@ class DashboardController extends Controller
 
         $para_a = $para == "" ? "" : $para."/";
 
-        $tunes_ordered = glob(env('STORAGE_PATH').$para_a.'*.mp3');
+        $tunes_ordered = glob(public_path(). '/songs/'.$para_a.'*.mp3');
         usort($tunes_ordered, function($a, $b) {
             return filemtime($a) < filemtime($b) ? 1 : 0;
         });
 
         $tunes = [];
         foreach ($tunes_ordered as $tune_ordered) {
-            $tunes[] = str_replace(env('STORAGE_PATH').$para_a, '', $tune_ordered);
+            $tunes[] = str_replace(public_path(). '/songs/'.$para_a, '', $tune_ordered);
         }
 
         $para = $para == "" ? '-' : $para;
@@ -71,7 +72,7 @@ class DashboardController extends Controller
     {
         try {
             return Response()->download('storage/data/'.$_GET['song']);
-        } catch (exception $e) {
+        } catch (\exception $e) {
             log::error('error downloading' . $_GET['song'] .' '. $e->getMessage());
         }
     }
@@ -79,41 +80,12 @@ class DashboardController extends Controller
     public function delete() {
         $para = $_GET['para'] == '-' ? '' : $_GET['para'].'/';
         try {
-            unlink('public/storage/data/'.$para.$_GET['song']);
-        } catch (exception $e) {
+            unlink(public_path(). '/songs/'.$para.$_GET['song']);
+        } catch (\exception $e) {
             Log::error('delete failed for '. $_GET['song']. ' '.$e->getMessage());
             return "";
         }
 
         return 'deleted';
     }
-
-    public function ctx() {
-
-        $items = scandir('storage/data/');
-
-        array_shift($items);
-        array_shift($items);
-
-        $tunes = [];
-        foreach ($items as $item) {
-            if (strpos($item, '.mp3') !== false) {
-                $tunes[] = $item;
-            }
-        }
-
-        $t_string = implode(' ', $tunes);
-
-        return view('ctx', compact('t_string'));
-    }
-
-    public function phaser() {
-        return view('phaser');
-    }
-
-    public function allpass() {
-        return view('allpass');
-    }
-
-
 }

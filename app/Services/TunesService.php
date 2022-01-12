@@ -2,42 +2,18 @@
 
 namespace App\Services;
 
-use App\Models\Page;
-use App\Models\Tune;
 use Illuminate\Support\Facades\Log;
 
 class TunesService
 {
-    protected $appPath = '/home/u1050-a6xqjx3tg3dg/www/crackmaninoff.com';
-
-    protected $songPath = '/public_html/public/storage/data/';
-
-    protected $ffmpegPath = '/usr/bin/ffmpeg';
-
     /*
         .wav = 'audio/x-wav'
         .mp3 = 'audio/mpeg'
         .aif = 'audio/x-aiff'
     */
-
     public function upload($request, $para)
     {
         return $this->saveFile($request, $para);
-    }
-
-    public function logRecord($tune, $page)
-    {
-        try {
-            Tune::create([
-                'name' => $tune,
-                'page_id' => Page::where('name', $page === '-' ? '/' : $page)->first()->id
-            ])->save();
-
-        } catch (exception $e) {
-            Log::error($e->getMessage());
-        }
-
-        return true;
     }
 
     public function compressConvertFile($para, $song_name, $typ)
@@ -48,7 +24,7 @@ class TunesService
             $subdir = $para . "/";
         }
 
-        $dir = env('APP_PATH') . env('SONG_PATH') . $subdir;
+        $dir = env('APP_PATH') . public_path() . '/songs/' . $subdir;
         $o_path = env('APP_PATH') . env('FFMPEG_PATH');
 
         //mp3 compression
@@ -89,9 +65,7 @@ class TunesService
             }
         }
 
-        $this->logRecord('_'.$song_name, $para === '' ? '/' : $para);
         return true;
-
     }
 
     public function saveFile($request, $para)
@@ -105,7 +79,7 @@ class TunesService
             //removes spaces in name
             $song_name = str_replace(" ", "_", $file->getClientOriginalName());
             $request->file('song')->store('upload');
-            $file->move(env('STORAGE_PATH') . ($para === '-' ? '' : $para), $song_name);
+            $file->move(public_path() . '/songs/' . ($para === '-' ? '' : $para), $song_name);
             if (!$this->compressConvertFile($para, $song_name, $typ)) {
                 return false;
             }
