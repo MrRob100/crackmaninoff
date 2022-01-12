@@ -22,7 +22,7 @@
         tunes="{{ $t_string }}"
         para="{{ $para }}"
         img-path="{{ env("IMG_PATH") }}"
-        storage-path="{{ env('APP_ENV') === 'local' ? '/songs' : '/public/songs' }}"
+        storage-path="{{ env('APP_ENV') === 'local' ? '/songs/' : '/public/songs/' }}"
     ></Ctx>
 
 @endsection
