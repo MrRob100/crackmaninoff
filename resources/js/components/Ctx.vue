@@ -101,28 +101,27 @@ export default {
 
         const loopUrl = "tenniscourt.wav";
 
-        // const source = audioCtx.createBufferSource();
-        //
-        // var request = new XMLHttpRequest();
-        // request.open('GET', loopUrl, true);
-        // request.responseType = 'arraybuffer';
-        //
-        // request.onload = function() {
-        //     var audioData = request.response;
-        //
-        //     audioCtx.decodeAudioData(audioData, function(buffer) {
-        //         var myBuffer = buffer;
-        //         source.buffer = myBuffer;
-        //         source.connect(audioCtx.destination);
-        //         isso.initSource = source;
-        //
-        //     },
-        //     function (e) {
-        //         "Error decoding audio data"
-        //     });
-        // }
-        //
-        // request.send();
+        const source = audioCtx.createBufferSource();
+
+        var request = new XMLHttpRequest();
+        request.open('GET', loopUrl, true);
+        request.responseType = 'arraybuffer';
+
+        request.onload = function() {
+            var audioData = request.response;
+
+            audioCtx.decodeAudioData(audioData, function(buffer) {
+                var myBuffer = buffer;
+                source.buffer = myBuffer;
+                source.connect(audioCtx.destination);
+                isso.initSource = source;
+            },
+            function (e) {
+                "Error decoding audio data"
+            });
+        }
+
+        request.send();
     },
 
     methods: {
@@ -131,7 +130,7 @@ export default {
 
             if (!playable && this.init) {
                 this.init = false;
-                // this.initSource.start(0, 1);
+                this.initSource.start(0, 1);
             }
         },
 

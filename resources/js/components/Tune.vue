@@ -140,7 +140,6 @@ export default {
     },
 
     getSource: function() {
-
       //source and impulse
       var subdir = this.para !== "-" ? this.para + "/" + this.name : "" + this.name;
 
