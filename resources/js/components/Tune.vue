@@ -215,7 +215,6 @@ export default {
       var endset = duration * this.playTo;
 
       try {
-
         Layout.playing(this.pos);
 
         this.src.start(0, offset);
@@ -233,14 +232,12 @@ export default {
       }
 
       this.fx();
-
     },
 
     getImpulse: function() {
       var impulseConvolver = this.ctx.createConvolver();
       var impulseRequest = new XMLHttpRequest();
 
-      //do fancy url get
       var impulseUrl = "tusk.wav";
 
       impulseRequest.open("GET", impulseUrl, true);
