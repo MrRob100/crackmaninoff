@@ -143,7 +143,7 @@ export default {
       //source and impulse
       var subdir = this.para !== "-" ? this.para + "/" + this.name : "" + this.name;
 
-      var sourceUrl = this.storagePath + subdir;
+      var sourceUrl = this.storagePath + "/songs/" + subdir;
 
       this.loading = true;
 
@@ -237,7 +237,7 @@ export default {
       var impulseConvolver = this.ctx.createConvolver();
       var impulseRequest = new XMLHttpRequest();
 
-      var impulseUrl = "tusk.wav";
+      var impulseUrl = this.storagePath + "tusk.wav";
 
       impulseRequest.open("GET", impulseUrl, true);
       impulseRequest.responseType = "arraybuffer";
