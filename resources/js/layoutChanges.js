@@ -56,6 +56,5 @@ export default {
 
         var move = document.getElementById("slither-" + pos);
         move.style.position = "relative";
-
     }
 }

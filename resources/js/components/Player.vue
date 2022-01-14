@@ -17,7 +17,7 @@
              v-for="(tune, index) in tunesFormatted"
              :key="tune"
         >
-            <div v-if="!deleted" :id="'slither-' + index">
+            <div v-if="!deleted" :id="'slither-' + index" class="slither-class">
                 <small v-if="auth" @click="deleteSong" class="delete-button to-blur">DELETE</small>
                 <div
                     class="stack-house to-blur"
@@ -298,7 +298,7 @@ export default {
             const impulseConvolver = this.ctx.createConvolver();
             const impulseRequest = new XMLHttpRequest();
 
-            const impulseUrl = "tusk.wav";
+            const impulseUrl = this.public + "/tusk.wav";
 
             impulseRequest.open("GET", impulseUrl, true);
             impulseRequest.responseType = "arraybuffer";
