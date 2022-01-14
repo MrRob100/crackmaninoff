@@ -31,7 +31,7 @@ export default {
     },
 
     blur(pos) {
-        var toBlur = document.getElementsByClassName("to-blur");
+        const toBlur = document.getElementsByClassName("to-blur");
         // var noBlur = document.getElementsByClassName("no-blur-" + pos);
 
         for (let item of toBlur) {
@@ -42,12 +42,12 @@ export default {
             }
         }
 
-        var move = document.getElementById("slither-" + pos);
-            move.style.position = "absolute";
+        const move = document.getElementById("slither-" + pos);
+        move.style.position = "absolute";
     },
 
     unblur(pos) {
-        var toBlur = document.getElementsByClassName("to-blur");
+        const toBlur = document.getElementsByClassName("to-blur");
         for (let item of toBlur) {
             item.style.filter = "none";
             item.style.cursor = "pointer";

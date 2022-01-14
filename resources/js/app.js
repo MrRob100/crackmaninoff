@@ -26,6 +26,7 @@ Vue.config.devtools = true;
 Vue.component('tune-crop', require('./components/TuneCrop.vue').default);
 Vue.component('tune', require('./components/Tune.vue').default);
 Vue.component('ctx', require('./components/Ctx.vue').default);
+Vue.component('player', require('./components/Player.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
