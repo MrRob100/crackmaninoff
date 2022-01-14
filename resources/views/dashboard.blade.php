@@ -28,7 +28,9 @@
     <player
         auth="{{ (bool) auth()->user() }}"
         tunes="{{ $t_string }}"
-        para="{{ $para }}">
+        para="{{ $para }}"
+        public="{{ env('APP_ENV') === 'local' ? '' : '/public' }}"
+    >
     </player>
 
 @endsection

@@ -48,7 +48,7 @@
                                 class="dld"
                                 v-on:click="download">
                                 <img data-toggle="tooltip" title="download" class="crack-icon dl-icon"
-                                     src="images/dld.png">
+                                     :src="public + '/images/dld.png'">
                             </button>
                         </a>
                     </div>
@@ -102,7 +102,7 @@ import Layout from '../layoutChanges.js';
 
 export default {
 
-    props: ["tunes", "para", "auth"],
+    props: ["tunes", "para", "auth", "public"],
 
     data: function() {
         return {
@@ -206,7 +206,7 @@ export default {
             //source and impulse
             const subdir = this.para !== "-" ? this.para + "/" + tune : "" + tune;
 
-            const sourceUrl = "/songs/" + subdir;
+            const sourceUrl = this.public + "/songs/" + subdir;
 
             this.loading = true;
 
