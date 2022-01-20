@@ -24,8 +24,6 @@ Vue.config.devtools = true;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('tune-crop', require('./components/TuneCrop.vue').default);
-Vue.component('tune', require('./components/Tune.vue').default);
-Vue.component('ctx', require('./components/Ctx.vue').default);
 Vue.component('player', require('./components/Player.vue').default);
 
 /**

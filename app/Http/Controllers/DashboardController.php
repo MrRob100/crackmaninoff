@@ -17,7 +17,6 @@ class DashboardController extends Controller
     }
 
     public function index($para = "") {
-
         $checker = App::make('App\Services\UrlService');
         $checked = $checker->checkUrl($para);
 
@@ -46,9 +45,13 @@ class DashboardController extends Controller
             return filemtime($a) < filemtime($b) ? 1 : 0;
         });
 
-        $tunes = [];
-        foreach ($tunes_ordered as $tune_ordered) {
-            $tunes[] = str_replace(public_path(). '/songs/'.$para_a, '', $tune_ordered);
+        if (isset($_GET['song'])) {
+            $tunes = [$para_a . $_GET['song']];
+        } else {
+            $tunes = [];
+            foreach ($tunes_ordered as $tune_ordered) {
+                $tunes[] = str_replace(public_path(). '/songs/'.$para_a, '', $tune_ordered);
+            }
         }
 
         $para = $para == "" ? '-' : $para;

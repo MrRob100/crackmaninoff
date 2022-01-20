@@ -17,14 +17,6 @@
             <a href='{{ $page }}'><p class="o-page">{{ $page }}</p></a>
         @endforeach
     </div>
-{{--    <Ctx--}}
-{{--        auth="{{ (bool) auth()->user() }}"--}}
-{{--        tunes="{{ $t_string }}"--}}
-{{--        para="{{ $para }}"--}}
-{{--        img-path="{{ env("IMG_PATH") }}"--}}
-{{--        storage-path="{{ env('APP_ENV') === 'local' ? '' : '/public/' }}"--}}
-{{--    ></Ctx>--}}
-
     <player
         auth="{{ (bool) auth()->user() }}"
         tunes="{{ $t_string }}"
