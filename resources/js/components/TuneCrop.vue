@@ -14,7 +14,7 @@ import Meths from '../meths.js';
 
 export default {
 
-  props: ['setting', 'name'],
+  props: ['setting', 'name', 'trackText'],
 
   data: function() {
     return {

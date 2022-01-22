@@ -29,8 +29,7 @@
                         class="stack-slice stack-bottom"
                     >
                         <div class="inln-btn">
-                            <h3 class="false-shift name-element" v-if="!loading">{{ tune }}<i class="fa fa-hand-pointer-o"></i></h3>
-                            <h3 class="false-shift" v-else>Loading...</h3>
+                            <h3 class="false-shift name-element" :id="'name_loading_' + index">{{ tune }}</h3>
                         </div>
 
                         <tune-crop
@@ -119,7 +118,6 @@ export default {
             init: true,
             initSource: {},
             gain: {},
-            loading: false,
             loaded: false,
             playlist: false,
             playable: true,
@@ -127,7 +125,7 @@ export default {
             playTo: 1,
             playing: false,
             masterCompression: {},
-            nameTrimmed: "",
+            myBuffer: null,
             notch: {},
             run: false,
             src: null,
@@ -149,11 +147,24 @@ export default {
         this.canvasWidth();
         window.addEventListener("resize", this.nameTrim);
         window.addEventListener("resize", this.canvasWidth);
+
+        let sourceData = [];
+        this.tunesFormatted.forEach(function() {
+            sourceData.push(null);
+        });
+
+        this.src = sourceData;
+
+        let myBufferData = [];
+        this.tunesFormatted.forEach(function() {
+            myBufferData.push(null);
+        });
+
+        this.myBuffer = myBufferData;
     },
 
     methods: {
         createCtx: function() {
-            const isso = this;
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             const audioCtx = new AudioContext();
             this.ctx = audioCtx;
@@ -194,7 +205,7 @@ export default {
                 this.ableToPlay = false;
                 this.convolver.disconnect();
 
-                if (!this.src) {
+                if (!this.src[index]) {
                     this.getSource(ctx, tune, index);
                 } else {
                     this.connectAndPlay(ctx, index);
@@ -208,7 +219,7 @@ export default {
 
             const sourceUrl = this.public + "/songs/" + subdir;
 
-            this.loading = true;
+            document.getElementById(`name_loading_${index}`).innerText = 'Loading...';
 
             const request = new XMLHttpRequest();
             request.open("GET", sourceUrl, true);
@@ -226,7 +237,7 @@ export default {
                         canvas.width = window.innerWidth;
                         isso.drawBuffer(canvas.width, canvas.height, canvas.getContext('2d'), buffer);
 
-                        isso.myBuffer = buffer;
+                        isso.myBuffer[index] = buffer;
 
                         isso.connectAndPlay(ctx, index);
                     },
@@ -248,9 +259,9 @@ export default {
         connectAndPlay: function (ctx, index) {
             let isso = this;
 
-            this.src = ctx.createBufferSource();
+            this.src[index] = ctx.createBufferSource();
 
-            this.src.onended = function () {
+            this.src[index].onended = function () {
                 if (!isso.stopClicked) {
                     Layout.stopped(index);
                     isso.$emit('ended', index);
@@ -259,32 +270,33 @@ export default {
                 }
             }
 
-            this.src.buffer = this.myBuffer;
-            this.src.loop = !this.playlist;
+            this.src[index].buffer = this.myBuffer[index];
+            this.src[index].loop = !this.playlist;
             this.gain.gain.value = 0.5;
 
-            this.src.connect(this.convolverGain);
-            this.src.connect(this.gain);
+            this.src[index].connect(this.convolverGain);
+            this.src[index].connect(this.gain);
             this.gain.connect(this.filter).connect(this.notch).connect(this.masterCompression);
             this.masterCompression.connect(this.ctx.destination);
 
             this.playFrom = Meths.findMarker(index, "start") / window.innerWidth;
 
-            const duration = this.src.buffer.duration;
+            const duration = this.src[index].buffer.duration;
             const offset = duration * this.playFrom;
             const endset = duration * this.playTo;
 
             try {
                 Layout.playing(index);
 
-                this.src.start(0, offset);
-                this.loading = false;
+                this.src[index].start(0, offset);
+
+                document.getElementById(`name_loading_${index}`).innerText = this.tunesFormatted[index];
 
                 this.playing = true;
                 this.loaded = true;
 
-                this.src.loopStart = offset;
-                this.src.loopEnd = endset;
+                this.src[index].loopStart = offset;
+                this.src[index].loopEnd = endset;
 
             } catch (err) {
                 this.$emit('able', true);
@@ -346,7 +358,7 @@ export default {
 
                 //try catcher
                 try {
-                    isso.src.playbackRate.value = speedControl.value;
+                    isso.src[index].playbackRate.value = speedControl.value;
                     speedValue.innerHTML = Math.floor(speedControl.value * 100) + "%";
 
                     isso.convolverGain.gain.value = reverbControl.value;
@@ -412,6 +424,10 @@ export default {
             }
         },
 
+        isLoading(index) {
+            return this.loading[index];
+        },
+
         canvasWidth: function () {
             this.screenWidth = window.innerWidth;
         },
@@ -436,7 +452,7 @@ export default {
             Layout.stopped(index);
             this.$emit('able', true);
             this.ableToPlay = true;
-            this.src.stop(0);
+            this.src[index].stop(0);
             this.convolver.disconnect();
             this.playing = false;
             this.loaded = false;
@@ -524,7 +540,7 @@ export default {
         },
 
         playFrom: function (val) {
-            //NEED TO REUSE
+            //NEED A WATCH DEEP
             if (this.src) {
                 this.src.loopStart = this.src.buffer.duration * val;
             }

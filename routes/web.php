@@ -3,6 +3,13 @@
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('/file/storage', function() {
+    $files = \Illuminate\Support\Facades\Storage::disk('s3')->files(env('BUCKET_DIR')); //works
+    dd($files);
+});
+
+
 //download
 Route::get('/download', [DashboardController::class, 'download']);
 
