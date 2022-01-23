@@ -6,7 +6,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/file/storage', function() {
     $files = \Illuminate\Support\Facades\Storage::disk('s3')->files(env('BUCKET_DIR')); //works
-    dd($files);
+//    dd($files);
+
+    $url = \Illuminate\Support\Facades\Storage::disk('s3')->url('capricosa.mp3');
+
+//    dd($url);
+
+
+//    $file = $file->storePubliclyAs($path, $filename);
+
+
+
 });
 
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\App;
 use App\Models\Page;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -24,33 +25,23 @@ class DashboardController extends Controller
             return redirect('');
         }
 
-        ini_set('max_post_size', 0);
-
-        if (!file_exists(public_path(). '/songs/' .$para)) {
-            //make it self destruct
-
-            mkdir(public_path(). '/songs/'.$para);
-            chmod(public_path(). '/songs/'.$para, 0777);
-        }
-
-        //save new page WORK ON THIS
+//        ini_set('max_post_size', 0);
 
         $p = Page::firstOrNew(['name' => $para === '' ? '/' : $para]);
         $p->save();
 
         $para_a = $para == "" ? "" : $para."/";
 
-        $tunes_ordered = glob(public_path(). '/songs/'.$para_a.'*.mp3');
-        usort($tunes_ordered, function($a, $b) {
-            return filemtime($a) < filemtime($b) ? 1 : 0;
-        });
+        $files = Storage::disk('s3')->files(env('BUCKET_DIR') . '/public');
 
         if (isset($_GET['song'])) {
             $tunes = [$para_a . $_GET['song']];
         } else {
             $tunes = [];
-            foreach ($tunes_ordered as $tune_ordered) {
-                $tunes[] = str_replace(public_path(). '/songs/'.$para_a, '', $tune_ordered);
+            foreach ($files as $file) {
+                $to_filter = env('BUCKET_DIR') . '/public/';
+
+                $tunes[] = str_replace($to_filter, '', $file);
             }
         }
 

@@ -99,7 +99,7 @@ import Layout from '../layoutChanges.js';
 
 export default {
 
-    props: ["tunes", "para", "auth", "public"],
+    props: ["tunes", "para", "auth", "public", "bucket"],
 
     data: function() {
         return {
@@ -247,7 +247,7 @@ export default {
             //source and impulse
             const subdir = this.para !== "-" ? this.para + "/" + tune : "" + tune;
 
-            const sourceUrl = this.public + "/songs/" + subdir;
+            const sourceUrl = this.bucket + "/public/" + subdir;
 
             document.getElementById(`name_loading_${index}`).innerText = 'Loading...';
 

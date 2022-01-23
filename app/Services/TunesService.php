@@ -68,7 +68,7 @@ class TunesService
         return true;
     }
 
-    public function saveFile($request, $para)
+    public function saveFile($request, $para): bool
     {
         $file = $request->file('song');
         $typ = $file->getMimeType();
@@ -78,11 +78,9 @@ class TunesService
 
             //removes spaces in name
             $song_name = str_replace(" ", "_", $file->getClientOriginalName());
-            $request->file('song')->store('upload');
-            $file->move(public_path() . '/songs/' . ($para === '-' ? '' : $para), $song_name);
-            if (!$this->compressConvertFile($para, $song_name, $typ)) {
-                return false;
-            }
+
+            $request->file('song')->storePubliclyAs(env('BUCKET_DIR') . '/public' . ($para === '-' ? '' : $para), $song_name, 's3');
+            return true;
         } else {
             Log::warning('wrong file type: '.$typ);
             return false;

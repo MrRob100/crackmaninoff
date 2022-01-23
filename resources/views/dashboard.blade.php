@@ -17,11 +17,13 @@
             <a href='{{ $page }}'><p class="o-page">{{ $page }}</p></a>
         @endforeach
     </div>
+
     <player
         auth="{{ (bool) auth()->user() }}"
         tunes="{{ $t_string }}"
         para="{{ $para }}"
         public="{{ env('APP_ENV') === 'local' ? '' : '/public' }}"
+        bucket="{{ env('STORAGE_URL') }}"
     >
     </player>
 
