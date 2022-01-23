@@ -22,7 +22,7 @@ export default {
 
     //check markers position
     findMarker(pos, which) {
-        var marker = document.getElementById('div-' + which + '-' + pos);
+        let marker = document.getElementById('div-' + which + '-' + pos);
         return marker.offsetLeft;
     }
 

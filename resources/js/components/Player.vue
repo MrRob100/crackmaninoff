@@ -33,9 +33,7 @@
                         </div>
 
                         <tune-crop
-                            @value="cropVal"
-                            @setStart="playSelection"
-                            @setEnd="playSelection"
+                            @tuneCropMounted="tuneCropMounted"
                             :id='"tc-"+index'
                             :setting='index'
                             :name='tune'
@@ -121,8 +119,8 @@ export default {
             loaded: false,
             playlist: false,
             playable: true,
-            playFrom: "",
-            playTo: 1,
+            playFrom: null,
+            playTo: null,
             playing: false,
             masterCompression: {},
             myBuffer: null,
@@ -161,9 +159,26 @@ export default {
         });
 
         this.myBuffer = myBufferData;
+
+        let playFromData = [];
+        this.tunesFormatted.forEach(function() {
+            playFromData.push(0);
+        });
+
+        this.playFrom = playFromData;
     },
 
     methods: {
+        tuneCropMounted: function() {
+            let playToData = [];
+            this.tunesFormatted.forEach(function(tune, index) {
+                let end = Meths.findMarker(index, "end") / window.innerWidth;
+                Meths.findMarker(index, "end");
+                playToData.push(end);
+            });
+
+            this.playTo = playToData;
+        },
         createCtx: function() {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             const audioCtx = new AudioContext();
@@ -196,9 +211,21 @@ export default {
                 ctx = this.createCtx();
             }
 
-            let prevent = document.getElementById('prevent-' + this.pos);
+            let markerStart = Meths.findMarker(index, "start") / window.innerWidth;
+            let markerEnd = Meths.findMarker(index, "end") / window.innerWidth;
 
-            if (!this.playing && this.ableToPlay && !prevent && this.playable && !this.dlding) {
+            if (this.playFrom[index] !== markerStart || this.playTo[index] !== markerEnd) {
+                this.playable = false;
+            } else {
+                this.playable = true;
+            }
+
+            // console.log(!this.playing);
+            // console.log(this.ableToPlay);
+            // console.log(this.playable);
+            // console.log(!this.dlding);
+
+            if (!this.playing && this.ableToPlay && this.playable && !this.dlding) {
 
                 this.$emit('able', false);
 
@@ -211,6 +238,9 @@ export default {
                     this.connectAndPlay(ctx, index);
                 }
             }
+
+            this.playFrom[index] = markerStart;
+            this.playTo[index] = markerEnd;
         },
 
         getSource: function (ctx, tune, index) {
@@ -279,11 +309,9 @@ export default {
             this.gain.connect(this.filter).connect(this.notch).connect(this.masterCompression);
             this.masterCompression.connect(this.ctx.destination);
 
-            this.playFrom = Meths.findMarker(index, "start") / window.innerWidth;
-
             const duration = this.src[index].buffer.duration;
-            const offset = duration * this.playFrom;
-            const endset = duration * this.playTo;
+            const offset = duration * this.playFrom[index];
+            const endset = duration * this.playTo[index];
 
             try {
                 Layout.playing(index);
@@ -432,16 +460,6 @@ export default {
             this.screenWidth = window.innerWidth;
         },
 
-        cropVal: function (which, value) {
-            var isso = this;
-            isso.ableToPlay = false;
-            setTimeout(function () {
-                isso.ableToPlay = true;
-                isso.$emit('able', true);
-            }, 500);
-            this.playSelection(which, value);
-        },
-
         stopProcess: function (index) {
             var isso = this;
             this.stopClicked = true;
@@ -456,15 +474,6 @@ export default {
             this.convolver.disconnect();
             this.playing = false;
             this.loaded = false;
-        },
-
-        playSelection: function (which, value) {
-            if (which === "s") {
-                this.playFrom = value;
-            }
-            if (which === "e") {
-                this.playTo = value > 0.98 ? 1 : value;
-            }
         },
 
         nameTrim: function () {
@@ -513,15 +522,6 @@ export default {
             }
         },
 
-        setPlayable(playable) {
-            this.playable = playable;
-
-            if (!playable && this.init) {
-                this.init = false;
-                this.initSource.start(0, 1);
-            }
-        },
-
         endHandler(val) {
             var isso = this;
             if (this.playlist) {
@@ -536,20 +536,6 @@ export default {
         run: function (val) {
             if (val == this.pos) {
                 this.play();
-            }
-        },
-
-        playFrom: function (val) {
-            //NEED A WATCH DEEP
-            if (this.src) {
-                this.src.loopStart = this.src.buffer.duration * val;
-            }
-        },
-
-        playTo: function (val) {
-            //NEED TO REUSE
-            if (this.src) {
-                this.src.loopEnd = this.src.buffer.duration * val;
             }
         },
     }
