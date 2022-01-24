@@ -25,8 +25,6 @@ class DashboardController extends Controller
             return redirect('');
         }
 
-//        ini_set('max_post_size', 0);
-
         $p = Page::firstOrNew(['name' => $para === '' ? '/' : $para]);
         $p->save();
 
