@@ -30,7 +30,7 @@ class DashboardController extends Controller
 
         $para_a = $para == "" ? "" : $para."/";
 
-        $files = Storage::disk('s3')->files(env('BUCKET_DIR') . '/public');
+        $files = Storage::disk('s3')->files(env('BUCKET_DIR') . '/public' . $para);
 
         if (isset($_GET['song'])) {
             $tunes = [$para_a . $_GET['song']];
