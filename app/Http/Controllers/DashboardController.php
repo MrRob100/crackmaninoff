@@ -30,14 +30,14 @@ class DashboardController extends Controller
 
         $para_a = $para == "" ? "" : $para."/";
 
-        $files = Storage::disk('s3')->files(env('BUCKET_DIR') . '/public' . $para);
+        $files = Storage::disk('s3')->files(env('BUCKET_DIR') . '/public/' . $para_a);
 
         if (isset($_GET['song'])) {
             $tunes = [$para_a . $_GET['song']];
         } else {
             $tunes = [];
             foreach ($files as $file) {
-                $to_filter = env('BUCKET_DIR') . '/public/';
+                $to_filter = env('BUCKET_DIR') . '/public/' . $para_a;
 
                 $tunes[] = str_replace($to_filter, '', $file);
             }
@@ -69,13 +69,13 @@ class DashboardController extends Controller
     }
 
     public function delete() {
-        $para = $_GET['para'] == '-' ? '' : $_GET['para'].'/';
-        try {
-            unlink(public_path(). '/songs/'.$para.$_GET['song']);
-        } catch (\exception $e) {
-            Log::error('delete failed for '. $_GET['song']. ' '.$e->getMessage());
-            return "";
-        }
+//        $para = $_GET['para'] == '-' ? '' : $_GET['para'].'/';
+//        try {
+//            unlink(public_path(). '/songs/'.$para.$_GET['song']);
+//        } catch (\exception $e) {
+//            Log::error('delete failed for '. $_GET['song']. ' '.$e->getMessage());
+//            return "";
+//        }
 
         return 'deleted';
     }

@@ -79,7 +79,7 @@ class TunesService
             //removes spaces in name
             $song_name = str_replace(" ", "_", $file->getClientOriginalName());
 
-            $request->file('song')->storePubliclyAs(env('BUCKET_DIR') . '/public' . ($para === '-' ? '' : $para), $song_name, 's3');
+            $request->file('song')->storePubliclyAs(env('BUCKET_DIR') . '/public/' . ($para === '-' ? '' : $para) . '', $song_name, 's3');
             return true;
         } else {
             Log::warning('wrong file type: '.$typ);
