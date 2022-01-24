@@ -291,12 +291,13 @@ export default {
 
             this.src[index] = ctx.createBufferSource();
 
-            this.src[index].onended = function () {
+            this.src[index].onended = function() {
                 if (!isso.stopClicked) {
                     Layout.stopped(index);
-                    isso.$emit('ended', index);
                     isso.playing = false;
                     isso.ableToPlay = true;
+                    let next = index + 1
+                    isso.play(isso.tunesFormatted[next], next);
                 }
             }
 
@@ -337,7 +338,6 @@ export default {
         getImpulse: function () {
             const impulseConvolver = this.ctx.createConvolver();
             const impulseRequest = new XMLHttpRequest();
-
             const impulseUrl = this.public + "/tusk.wav";
 
             impulseRequest.open("GET", impulseUrl, true);
@@ -520,24 +520,7 @@ export default {
                 }
                 context.fillRect(i, (1 + min) * amp, 1, Math.max(1, (max - min) * amp));
             }
-        },
-
-        endHandler(val) {
-            var isso = this;
-            if (this.playlist) {
-                isso.playable = true;
-
-                // check if not last tune
-                this.run = val + 1;
-            }
         }
-    },
-    watch: {
-        run: function (val) {
-            if (val == this.pos) {
-                this.play();
-            }
-        },
     }
 }
 
